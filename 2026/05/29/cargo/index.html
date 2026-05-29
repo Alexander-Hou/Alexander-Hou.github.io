@@ -9,7 +9,7 @@
     
     <title>
         
-            Rust环境搭建 |
+            cargo |
         
         Alexander Hou&#39;s blog
     </title>
@@ -197,7 +197,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Rust环境搭建
+                        cargo
                     </div>
                 
 
@@ -223,13 +223,13 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2026-05-29 01:14:36</span>
+                <span class="datetime">2026-05-29 19:30:58</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Fri May 29 2026 01:15:40 GMT+0800">2026-05-29 01:15:40</span>
+                    <span class="datetime" data-updated="Fri May 29 2026 19:36:18 GMT+0800">2026-05-29 19:36:18</span>
                 </span>
             
         
@@ -265,68 +265,44 @@
                     
 
                     
-                         <p>配置环境对Arch Linux用户来说简直是轻车熟路。不过在安装Rust时有一个关键的选择：<strong>不要使用 Arch 官方仓库的 <code>pacman -S rust</code></strong>。</p>
-<p>为了后续开发的灵活性（比如切换 stable&#x2F;nightly 版本、交叉编译、组件管理），业界标准是使用 <strong><code>rustup</code></strong>（Rust 的版本管理器，类似于 Node.js 的 nvm 或 Python 的 pyenv）。</p>
-<h2 id="安装基础工具链"><a href="#安装基础工具链" class="headerlink" title="安装基础工具链"></a>安装基础工具链</h2><p>打开终端，直接使用官方推荐的脚本安装 <code>rustup</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --proto <span class="string">&#x27;=https&#x27;</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh</span><br></pre></td></tr></table></figure>
-
-<p>脚本运行后，会提示选择安装方式，直接输入 1（Proceed with standard installation） 回车即可。它会自动下载最新的 Stable（稳定版）编译器 rustc、包管理器 cargo 以及标准库。</p>
-<p>安装完成后，工具链会位于 ~&#x2F;.cargo&#x2F;bin。你需要让当前终端生效（或者重启终端）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> <span class="string">&quot;<span class="variable">$HOME</span>/.cargo/env&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="验证安装"><a href="#验证安装" class="headerlink" title="验证安装"></a>验证安装</h2><p>验证一下三大核心组件是否就位：</p>
+                         <p>Rust环境已经搭建好了，我们可以正式来看看“后勤保障部”：<code>cargo</code> 和 <code>Cargo.toml</code>。</p>
+<p>在 C 语言的世界里，我们经常要手工编写 <code>Makefile</code> 或 <code>CMakeLists.txt</code>，管理 <code>#include</code> 路径，还要用 <code>apt</code> 或 <code>pacman</code> 痛苦地处理第三方库的动态链接（<code>.so</code>）和静态链接（<code>.a</code>）。</p>
+<p>而在 Rust 里，<code>cargo</code> 把构建系统、包管理器、测试框架、文档生成器全部揉在了一起。它就是你的 CMake + make + pacman + GDB 启动器。</p>
+<h2 id="cargo终端常用命令"><a href="#cargo终端常用命令" class="headerlink" title="cargo终端常用命令"></a>cargo终端常用命令</h2><p><code>cargo new &lt;项目名&gt; --bin</code>：创建一个二进制可执行项目。</p>
+<p><code>cargo new &lt;项目名&gt; --lib</code>：创建一个写库（<code>.a</code>&#x2F;<code>.so</code>）的项目。</p>
+<p><code>cargo check</code>：极速检查语法。 它只做语法分析和类型检查，不生成机器码。因为 Rust 的后端编译（LLVM）比较慢，写代码时用 <code>cargo check</code> 来看有没有报错是最快的。</p>
+<p><code>cargo build</code>：在 <code>target/debug/</code> 下生成带调试符号的二进制文件。</p>
+<p><code>cargo run</code>：组合拳，先执行 <code>cargo build</code>，如果成功则立刻运行这个二进制。</p>
+<p><code>cargo build --release</code>：启动极致优化编译，在 <code>target/release/</code> 下生成没有任何冗余、速度拉满的二进制文件。</p>
+<p><code>cargo fmt</code>：代码格式化。 强迫症的福音。不管是大括号换行还是空格，全行业统一标准，敲一下自动把整个项目排版得整整齐齐。</p>
+<p><code>cargo clippy</code>：Rust 届的“老中医”。 它是官方的静态审查工具（Linter）。它不仅能查错，还会教你做人。比如它会提示：“你这段代码虽然能跑，但写得太像 C 语言了，在 Rust 里用某个函数会更安全、更高效。”</p>
+<h2 id="解剖-Cargo-toml：现代化的“Makefile”"><a href="#解剖-Cargo-toml：现代化的“Makefile”" class="headerlink" title="解剖 Cargo.toml：现代化的“Makefile”"></a>解剖 Cargo.toml：现代化的“Makefile”</h2><p>在创建一个新的Rust项目后，可以看到项目目录会出现 <code>Cargo.toml</code> 和 <code>src/main.rs</code> 文件。我们来看一看 <code>Cargo.toml</code> 。</p>
+<p><code>Cargo.toml</code> 使用的是 TOML（Tom’s Obvious, Minimal Language）语法。它主要由三个核心板块构成：</p>
 <ul>
-<li><p>编译器：</p>
+<li><p><code>[package]</code>—— 基础元数据</p>
+<p>定义你自己的程序信息，类似于 C 语言里你在头文件里定义的版本宏。</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[package]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;hello_linux&quot;</span>      <span class="comment"># 项目名称，编译出来的二进制文件名就是它</span></span><br><span class="line"><span class="attr">version</span> = <span class="string">&quot;0.1.0&quot;</span>                <span class="comment"># 项目版本号</span></span><br><span class="line"><span class="attr">edition</span> = <span class="string">&quot;2024&quot;</span>                <span class="comment"># Rust 语言的大版本迭代（目前主流是 2021）</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rustc --version</span><br></pre></td></tr></table></figure>
+<li><p><code>[dependencies]</code>—— 惊艳的包管理</p>
+<p>如果你要用任何第三方库，直接往这一写，Cargo 自动帮你去镜像源下载、编译、链接，一行命令都不需要多敲。</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="comment"># 基础包：直接指定版本。Cargo 会自动处理它的底层 C 依赖</span></span><br><span class="line"><span class="attr">libc</span> = <span class="string">&quot;0.2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进阶包：带特性的包。Rust 的库允许“按需编译”</span></span><br><span class="line"><span class="comment"># 比如 tokio（高性能异步网络库），我们只启用它的宏和多线程运行时特性</span></span><br><span class="line"><span class="attr">tokio</span> = &#123; version = <span class="string">&quot;1.0&quot;</span>, features = [<span class="string">&quot;macros&quot;</span>, <span class="string">&quot;rt-multi-thread&quot;</span>] &#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>包管理器与构建工具：</p>
+<li><p><code>[profile]</code>—— 编译器优化开关</p>
+<p>相当于 C 语言里的 <code>-O0</code>, <code>-O2</code>, <code>-O3</code> 和 <code>-g</code> 编译选项。</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当你运行 cargo build 时（开发调试），应用这个配置</span></span><br><span class="line"><span class="section">[profile.dev]</span></span><br><span class="line"><span class="attr">opt-level</span> = <span class="number">0</span>      <span class="comment"># 不优化，编译速度最快</span></span><br><span class="line"><span class="attr">debug</span> = <span class="literal">true</span>       <span class="comment"># 生成完整的 DWARF 调试信息（配合 gdb）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当你运行 cargo build --release 时（生产发布），应用这个配置</span></span><br><span class="line"><span class="section">[profile.release]</span></span><br><span class="line"><span class="attr">opt-level</span> = <span class="number">3</span>      <span class="comment"># 极致优化，相当于 gcc -O3</span></span><br><span class="line"><span class="attr">debug</span> = <span class="literal">false</span>      <span class="comment"># 剥离调试信息，减小体积</span></span><br></pre></td></tr></table></figure>
+
+<p>只要编译过，项目下就会多出一个 <code>Cargo.lock</code> 文件。它是 cargo 自动生成的，里面精确记录了你当前项目依赖的具体版本号和哈希值。只需要知道：不要手动修改它。</p>
 </li>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cargo --version</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>版本管理器：</p>
-</li>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rustup --version</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="配置国内镜像源"><a href="#配置国内镜像源" class="headerlink" title="配置国内镜像源"></a>配置国内镜像源</h2><p>在 Arch 下，为了让 cargo fetch 下载依赖库（Crates）时起飞，建议配置国内镜像源。执行以下操作：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.cargo/config.toml </span><br></pre></td></tr></table></figure>
-
-<p>写入以下代码：</p>
-<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 直接指定默认的 crates-io 换成什么源</span></span><br><span class="line"><span class="section">[source.crates-io]</span></span><br><span class="line"><span class="attr">replace-with</span> = <span class="string">&#x27;sjtu-sparse&#x27;</span> <span class="comment"># 明确指向下面定义的高校稀疏源</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 定义上海交大的稀疏协议源</span></span><br><span class="line"><span class="section">[source.sjtu-sparse]</span></span><br><span class="line"><span class="attr">registry</span> = <span class="string">&quot;sparse+https://mirrors.sjtug.sjtu.edu.cn/crates.io-index/&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="安装必备的系统组件"><a href="#安装必备的系统组件" class="headerlink" title="安装必备的系统组件"></a>安装必备的系统组件</h2><p>有几个组件是必装的，运行以下命令进行安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rustup component add rust-analyzer rust-src llvm-tools</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="在VS-code中搭建Rust开发环境"><a href="#在VS-code中搭建Rust开发环境" class="headerlink" title="在VS code中搭建Rust开发环境"></a>在VS code中搭建Rust开发环境</h2><p>打开 VS Code，直接在扩展市场（Marketplace）中搜索安装：Rust-Analyzer。</p>
-<p>对于代码调试，我的做法是直接在终端用 GDB 来调试 Rust 编译出来的二进制文件。因为 Rust 和 C 语言一样，都是直接编译成原生机器码的系统级语言，并且同样使用 DWARF格式来存储调试符号。虽然普通的 <code>gdb</code> 就能直接加载 Rust 程序，但由于 Rust 有很多独有的高级类型（比如 <code>String</code>、<code>Vec</code>、<code>Option</code> 以及带有变体的 <code>Enum</code>），原生的 GDB 在打印（<code>print</code>）这些变量时，只会把它当作一堆凌乱的 C 结构体和裸指针打印出来，非常痛苦。为了解决这个问题，Rust 官方提供了一个名为 <strong><code>rust-gdb</code></strong> 的包装脚本。它本质上就是调用你系统里的 <code>gdb</code>，但自动加载了一套 Python 脚本（Pretty-printers）。这套脚本能把 Rust 独有的复杂数据结构，在终端里还原成人类可读的 Rust 语法格式。开发者不需要单独安装它，通过 <code>rustup</code> 安装好环境后，它已经躺在你的终端里了：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rust-gdb --version</span><br></pre></td></tr></table></figure>
-
-<p>使用rust-gdb调试手法和gdb几乎一模一样。</p>
-<h2 id="第一个-Rust-项目"><a href="#第一个-Rust-项目" class="headerlink" title="第一个 Rust 项目"></a>第一个 Rust 项目</h2><p>不用手工去写 Makefile 或者 CMakeLists.txt，Rust 用 <code>cargo</code> 搞定一切。</p>
-<p>运行以下命令创建项目：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cargo new hello_linux --bin</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> hello_linux</span><br></pre></td></tr></table></figure>
-
-<p>cargo 会自动帮你初始化一个 Git 仓库，并生成如下目录结构：</p>
+<h2 id="概念颠覆：C-的“多文件编译”-vs-Cargo-的-“Crate”-树"><a href="#概念颠覆：C-的“多文件编译”-vs-Cargo-的-“Crate”-树" class="headerlink" title="概念颠覆：C 的“多文件编译” vs Cargo 的 “Crate” 树"></a>概念颠覆：C 的“多文件编译” vs Cargo 的 “Crate” 树</h2><p>在 C 语言中，编译的最小单元是 <code>.c</code> 文件（编译单元）。<code>gcc</code> 把每个 <code>.c</code> 编译成 <code>.o</code>，最后通过 <code>ld</code> 链接成二进制。你需要写复杂的 <code>Makefile</code> 来追踪谁依赖谁、哪个头文件变了需要重新编译。</p>
+<p>而在 Rust 中，<code>cargo</code> 管理的最小编译单元叫 <code>Crate</code>（板条箱）。</p>
 <ul>
-<li><code>Cargo.toml</code>：项目元数据和依赖管理（类似于 CMakeLists.txt 或 package.json）。</li>
-<li><code>src/main.rs</code>：源代码入口。</li>
+<li><p>一个项目可以包含多个 <code>.rs</code> 文件，但在 <code>cargo</code> 眼里，它们共同构成了<strong>一个</strong> <code>Crate</code>。</p>
+</li>
+<li><p><code>cargo</code> 编译时，会把整个 <code>Crate</code> 当作一个整体交给 <code>rustc</code>。这意味着 <code>rustc</code> 天然拥有全局视角，可以在整个 <code>Crate</code> 内部做极致的内联优化（Inlining）和死代码消除（Dead Code Elimination），不需要像 C 语言那样依赖复杂的 <code>LTO</code>（链接期优化）参数。</p>
+</li>
 </ul>
-<p>现在，向<code>src/main.rs</code>写入以下代码：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func <span class="title function_ invoke__">main</span>()&#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Hello, rust!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果要运行项目，在项目根目录下直接执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cargo run</span><br></pre></td></tr></table></figure>
-
-<p>它会完成编译并打印出 <code>Hello, rust!</code> 。</p>
-<p>这样，Rust环境就搭建好了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对程序员来说，<code>cargo</code> 不仅仅是一个包管理器，它是一套规范了整个工业界标准的底层构建脚手架。它帮你接管了依赖的下载、链接的先后顺序、多线程并行编译的调度，让你能够把 100% 的精力，专注于如何用 Rust 写出高性能、安全的底层系统代码。</p>
 
                     
                 </div>
@@ -347,31 +323,15 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2026/05/29/cargo/"
-                                   title="cargo"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">cargo</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2026/05/29/build-blog-md/"
-                                   title="使用Hexo + GitHub Pages搭建博客"
+                                   href="/2026/05/29/build-rust-env-md/"
+                                   title="Rust环境搭建"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">使用Hexo + GitHub Pages搭建博客</span>
+                                        <span class="post-nav-title-item text-ellipsis">Rust环境搭建</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -399,7 +359,7 @@
             <div class="pc-post-toc left-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E9%93%BE"><span class="nav-number">1.</span> <span class="nav-text">安装基础工具链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">验证安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">配置国内镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%BF%85%E5%A4%87%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%BB%84%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">安装必备的系统组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8VS-code%E4%B8%AD%E6%90%AD%E5%BB%BARust%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="nav-number">5.</span> <span class="nav-text">在VS code中搭建Rust开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA-Rust-%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.</span> <span class="nav-text">第一个 Rust 项目</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cargo%E7%BB%88%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">cargo终端常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%89%96-Cargo-toml%EF%BC%9A%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E2%80%9CMakefile%E2%80%9D"><span class="nav-number">2.</span> <span class="nav-text">解剖 Cargo.toml：现代化的“Makefile”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E9%A2%A0%E8%A6%86%EF%BC%9AC-%E7%9A%84%E2%80%9C%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91%E2%80%9D-vs-Cargo-%E7%9A%84-%E2%80%9CCrate%E2%80%9D-%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">概念颠覆：C 的“多文件编译” vs Cargo 的 “Crate” 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol>
     </div>
 </div>
 
@@ -537,7 +497,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E9%93%BE"><span class="nav-number">1.</span> <span class="nav-text">安装基础工具链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">验证安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">配置国内镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%BF%85%E5%A4%87%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%BB%84%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">安装必备的系统组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8VS-code%E4%B8%AD%E6%90%AD%E5%BB%BARust%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="nav-number">5.</span> <span class="nav-text">在VS code中搭建Rust开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA-Rust-%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.</span> <span class="nav-text">第一个 Rust 项目</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cargo%E7%BB%88%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">cargo终端常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%89%96-Cargo-toml%EF%BC%9A%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E2%80%9CMakefile%E2%80%9D"><span class="nav-number">2.</span> <span class="nav-text">解剖 Cargo.toml：现代化的“Makefile”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E9%A2%A0%E8%A6%86%EF%BC%9AC-%E7%9A%84%E2%80%9C%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91%E2%80%9D-vs-Cargo-%E7%9A%84-%E2%80%9CCrate%E2%80%9D-%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">概念颠覆：C 的“多文件编译” vs Cargo 的 “Crate” 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol>
     </div>
 </div>
 
