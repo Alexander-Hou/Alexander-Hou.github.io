@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Alexander Hou">
+    
+    <title>
+        
+            pacman的原理 |
+        
+        Alexander Hou&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#1793d1","title":"Alexander Hou's blog","author":"Alexander Hou","avatar":"/images/avatar.jpg","logo":null,"favicon":null},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep it simple, stupid.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/Alexander-Hou","weixin":"img | ./images/wechat.jpg","qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":false,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2026,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Alexander Hou&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        pacman的原理
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Alexander Hou</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2026-06-11 14:25:48</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Wed Jun 17 2026 20:26:58 GMT+0800">2026-06-17 20:26:58</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Arch/">Arch</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>作为 Arch Linux 用户，定期清理系统是必经之路。pacman 和 yay（或者其他 AUR 助手）虽然日常都在用，但经常也就是 <code>-Syu</code> 一键流，真正到清理垃圾、处理孤儿包的时候，容易忘掉那些组合参数。这篇文章整理了一些与包管理相关的知识，作为一位Arch Linux爱好者，我认为深入<code>pacman</code> 的过程是可以学到很多东西的。</p>
+<h2 id="pacman工作原理"><a href="#pacman工作原理" class="headerlink" title="pacman工作原理"></a>pacman工作原理</h2><p>Arch Linux 的 <code>pacman</code> 能够做到如此轻量、快速，是因为它的底层设计极其纯粹。它不像 Ubuntu 的<code>apt</code>或 Fedora 的<code>dnf</code>那样维护复杂的元数据服务器，也不在本地运行繁重的数据库守护进程。<code>pacman</code> 的本质是一个本地 tar 包管理器 + 极其简单的 C 语言依赖求解器。下面我们拆解一下 <code>pacman</code> 的核心工作原理：从它的数据库结构，到你敲下安装命令时，底层究竟发生了什么。</p>
+<h3 id="一切皆在-var-lib-pacman"><a href="#一切皆在-var-lib-pacman" class="headerlink" title="一切皆在 &#x2F;var&#x2F;lib&#x2F;pacman&#x2F;"></a>一切皆在 &#x2F;var&#x2F;lib&#x2F;pacman&#x2F;</h3><p><code>pacman</code> 为什么快？因为它的“数据库”不是 SQL，也不是复杂的二进制文件，而是一个<strong>纯文本的文件系统目录</strong>。如果你进入 <code>/var/lib/pacman/</code>，你会发现两个核心目录，一个是<code>sync/</code> （远程仓库的镜像本地缓存），另一个是<code>local/</code> （你本地已安装的数据库），接下来，我们将深入探索这两个目录。</p>
+<p>首先便是 <code>sync/</code> 目录，在 <code>/var/lib/pacman/</code> 架构中，<code>sync/</code> 目录扮演着“本地镜像站索引缓存”的角色。它是 Arch Linux 能够实现“秒级”搜索远程仓库的核心所在。如果深入进去看，这个目录里存放的其实是<strong>你启用的各个官方仓库（如 core、extra）以及第三方仓库的本地数据库文件</strong>。下面我们用最直观的方式拆解这个目录里究竟存了什么、长什么样，以及它是如何工作的。我们进入 <code>/var/lib/pacman/sync/</code> ，我们会看到以下文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alexander-arch-linux% <span class="built_in">cd</span> /var/lib/pacman/sync/</span><br><span class="line">alexander-arch-linux% <span class="built_in">ls</span></span><br><span class="line">core.db  extra.db  multilib.db</span><br></pre></td></tr></table></figure>
+
+<p>现在我们以 <code>extra.db</code> 为例，使用 <code>file</code> 命令去看看这些文件的真面目。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alexander-arch-linux% file extra.db</span><br><span class="line">extra.db: gzip compressed data, from Unix, original size modulo 2^32 35645440</span><br></pre></td></tr></table></figure>
+
+<p>根据输出，这些 <code>.db</code> 后缀的文件，表面上叫“数据库”，其实全都是用 gzip 压缩的普通 <code>.tar.gz</code> 归档文件。现在我们用 <code>tar</code> 去解压它，去看看它里面有什么。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">alexander-arch-linux% <span class="built_in">mkdir</span> ~/test &amp;&amp; <span class="built_in">cd</span> ~/test</span><br><span class="line">alexander-arch-linux% <span class="built_in">cp</span> /var/lib/pacman/sync/extra.db ./extra.tar.gz</span><br><span class="line">alexander-arch-linux% <span class="built_in">ls</span></span><br><span class="line">extra.tar.gz</span><br><span class="line">alexander-arch-linux% <span class="built_in">mkdir</span> extra_extracted    </span><br><span class="line">alexander-arch-linux% tar -xf extra.tar.gz -C ./extra_extracted</span><br><span class="line">alexander-arch-linux% <span class="built_in">ls</span></span><br><span class="line">extra_extracted  extra.tar.gz</span><br><span class="line">alexander-arch-linux% <span class="built_in">cd</span> extra_extracted</span><br><span class="line">alexander-arch-linux% <span class="built_in">ls</span> -l | <span class="built_in">head</span> -n 20</span><br></pre></td></tr></table></figure>
+
+<p>执行完 <code>ls</code> 之后，会看到一长串以“软件名-版本号-构建号”命名的文件夹。我们直接拿 <code>aarch64-linux-gnu-gcc</code> 作为例子，这是一个交叉编译器，它的实际作用是：让你在运行 <code>x86_64</code>（英特尔&#x2F;AMD）架构的 Arch Linux计算机上，编译出能跑在 <code>ARM64</code>（比如树莓派、手机、RISC 架构服务器）上的程序，不过这其实不重要。我们直接切入 <code>aarch64-linux-gnu-gcc</code> 的元数据文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alexander-arch-linux% <span class="built_in">cd</span> aarch64-linux-gnu-gcc-*       </span><br><span class="line">alexander-arch-linux% <span class="built_in">ls</span> -al            </span><br><span class="line">.rw-r--r-- 1.3k alexander 26 4月  00:06 desc</span><br></pre></td></tr></table></figure>
+
+<p>我们看到里面只有 <code>desc</code> 这一个纯文本文件。现在，我们直接查看这个文件的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more desc</span><br></pre></td></tr></table></figure>
+
+<p>接下来，我们将要拆解 <code>desc</code> 中的每一个字段，这些代码块的内容都来源于文件内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%FILENAME%</span><br><span class="line">aarch64-linux-gnu-gcc-15.2.0-1-x86_64.pkg.tar.zst</span><br></pre></td></tr></table></figure>
+
+<p><code>%FILENAME%</code> 的含义是对应的物理软件包文件名，后缀 <code>.pkg.tar.zst</code> 再次印证了 Arch 的本质：它就是一个用 <code>zstd</code> 算法压缩的 <code>tar</code> 归档。这个字段扮演着“远程文件精准定位器”的角色。简单来说，它的核心作用是：告诉 <code>pacman</code> 去镜像站下载该软件时，那个真正的 <code>.pkg.tar.zst</code> 压缩包在服务器上叫什么名字。当我们敲下 <code>sudo pacman -S aarch64-linux-gnu-gcc</code> 时，<code>pacman</code> 本地并没有这个软件的二进制实体，它必须去联网下载。说到联网，就不得不提到 <code>pacman</code> 核心架构中最漂亮的设计之一：静态 URL 映射机制。</p>
+<p>简单来说，<code>pacman</code> 能够如此高效，是因为它把全世界成百上千个镜像站的复杂目录结构，抽象成了一套像拼积木一样的标准公式。它不需要去问服务器“请问某个软件在哪”，它自己算一算就知道路径。首先便是镜像站的“千篇一律”，即标准目录树，不管是中科大源（ustc）、清华源（tuna），还是国外的官方源，只要它们宣称自己是 “Arch Linux 镜像站”，它们的服务器上就必须建立一套一模一样的文件夹结构。这套结构通常长这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">archlinux/                 &lt;-- 镜像站的根目录</span><br><span class="line">├── core/</span><br><span class="line">│   └── os/</span><br><span class="line">│       └── x86_64/        &lt;-- 存放核心系统包和 core.db</span><br><span class="line">└── extra/</span><br><span class="line">    └── os/</span><br><span class="line">        └── x86_64/        &lt;-- 存放常用扩展包和 extra.db</span><br></pre></td></tr></table></figure>
+
+<p>因为这个结构是定死的，所以 pacman 只需要知道三样东西，就能用 C 语言的字符串拼接函数（比如 sprintf）瞬间组合出完整的服务器路径。现在，我们将会探究这三块“积木“。</p>
+<ul>
+<li><p>积木1：镜像站底座（Base URL）</p>
+<p>我们在 <code>/etc/pacman.d/mirrorlist</code> 里面写了什么，它就用什么。比如我们启用了清华源，它就在内存里准备好字符串：<code>https://mirrors.tuna.tsinghua.edu.cn/archlinux/</code> 。</p>
+</li>
+<li><p>积木2：仓库名字（Repository）</p>
+<p>当我们在命令行运行 <code>pacman -S aarch64-linux-gnu-gcc</code> 时，<code>pacman</code> 会去本地的 <code>sync/</code> 目录下翻账本。它发现这个包的 <code>desc</code> 文件是在 <code>extra.db</code> 里面解压出来的。 于是它立刻断定：这个软件属于 <code>extra</code> 仓库。它把 <code>extra/</code> 贴到上一段字符串后面：<code>https://mirrors.tuna.tsinghua.edu.cn/archlinux/extra/</code> 。</p>
+</li>
+<li><p>积木3：系统架构与固定后缀（OS &amp; Architecture）</p>
+<p>由于我们运行的是标准的 Arch Linux，机器架构是 x86_64 。<code>pacman</code> 会读取自身的配置文件，自动加上固定的补全路径 <code>/os/x86_64/</code>。 于是就得到了<code>https://mirrors.tuna.tsinghua.edu.cn/archlinux/extra/os/x86_64/</code> 。</p>
+</li>
+</ul>
+<p>完成了这三块积木的拼接，<code>pacman</code> 的手里就拿到了这个软件所在的远程文件夹通票。接下来，就是<code>%FILENAME%</code> 字段发挥作用的时候了。<code>pacman</code>把从 <code>desc</code> 里读到的文件名无缝贴上去。得到了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://mirrors.tuna.tsinghua.edu.cn/archlinux/extra/os/x86_64/aarch64-linux-gnu-gcc-15.2.0-1-x86_64.pkg.tar.zst</span><br></pre></td></tr></table></figure>
+
+<p>最终，<code>pacman</code> 拿着这个长得像面条一样的完整网络 URL，直接丢给底层的网络下载引擎，数据流就开始顺着网线源源不断地下载到 <code>/var/cache/pacman/pkg/</code> 目录下了。</p>
+<p>我们可以看到，<code>pacman</code> 极度缺乏热情，它从来不和远程服务器进行“智能对话”，它所有的网络下载，全都是靠读取本地配置和文本数据库，在本地硬生生把目标 URL “拼”出来的。 这种不依赖服务器动态查询的设计，就是它速度飞快的硬核保障。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%NAME%</span><br><span class="line">aarch64-linux-gnu-gcc</span><br><span class="line"></span><br><span class="line">%BASE%</span><br><span class="line">aarch64-linux-gnu-gcc</span><br></pre></td></tr></table></figure>
+
+<p>这两个字段触及到了 Arch Linux 打包制度中非常核心的 “单一源码包多重分裂” 机制。在 Arch Linux 中，打包一个软件需要编写一个叫 <code>PKGBUILD</code> 的脚本。通常情况下，一个源码包编译出来后，只能得到一个同名的软件。此时，<code>%NAME%</code> 和 <code>%BASE%</code> 是一模一样的。但是，有一些软件体积庞大，或者组件非常多。如果把它们全塞进一个包里，用户就算只想要一个小功能，也必须下载整套“全家桶”，这违背了 Arch 的轻量哲学。于是，Arch 引入了 “分割包（Split Packages）” 机制：允许一个源码包（Base），在编译完成后，分裂成好几个不同的独立软件包（Name）分别上架。</p>
+<p><code>%NAME% </code>是包的唯一标识名，<code>%BASE%</code>是源码包（PKGBUILD）的名称。可以将 <code>%NAME%</code> 理解为“孩子”出生后拿到的独立身份证号&#x2F;姓名，而<code>%BASE%</code> 是它所属的“家族”或“父项目”的名字。在 Arch 中，一个源码包可以分裂出多个子包（比如 <code>gcc</code> 源码可以同时产出 <code>gcc</code>、<code>gcc-fortran</code>、<code>gcc-objc</code> 等）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%VERSION% </span><br><span class="line">15.2.0-1</span><br><span class="line"></span><br><span class="line">%DESC%</span><br><span class="line">The GNU Compiler Collection - cross compiler for ARM64 target</span><br></pre></td></tr></table></figure>
+
+<p><code>%VERSION%</code> 是软件版本号15.2.0加上 Arch 官方的第 <code>1</code> 次打包构建。<code>%DESC</code> 则是软件一句话简介，表明了它“面向 ARM64 目标的交叉编译器”的身份。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%CSIZE%</span><br><span class="line">87248449</span><br><span class="line"></span><br><span class="line">%ISIZE%</span><br><span class="line">398046252</span><br></pre></td></tr></table></figure>
+
+<p>这两个字段的含义是空间占用，单位是<strong>字节（Byte）</strong>。<code>%CSIZE%</code>（Compressed Size）表示压缩包约 <strong>83.2 MiB</strong>（下载时耗费的流量）。<code>%ISIZE%</code>（Installed Size）表示解压后约 <strong>379.6 MiB</strong>（在硬盘上实际吃掉的空间）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%SHA256SUM%</span><br><span class="line">3300aefb936e523747f8620594fa9e415089c4c199815bee3ab23a73d34e7752</span><br></pre></td></tr></table></figure>
+
+<p>这个字段表示下载校验和。包下载完成后，<code>pacman</code> 内部会运行哈希算法计算下载文件的 SHA256 值。如果和这一行对不上，说明下载过程丢包了，或者遇到了中间人攻击，<code>pacman</code> 会果断报错并拒绝安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%PGPSIG%</span><br><span class="line">iQIzBAABCgAdFiEEJipY7GxR9...</span><br></pre></td></tr></table></figure>
+
+<p>这是极为重要的 PGP 数字签名。这是打包者用私钥对这个包做的签名。当你的 Arch 运行 <code>pacman</code> 时，它会用你本地信任的 Arch 密钥环（<code>archlinux-keyring</code>）去解密验证。只有 SHA256 和 PGP 签名双重通过，一个包才会被允许写入根目录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">%BUILDDATE%</span><br><span class="line">1777123867</span><br><span class="line"></span><br><span class="line">%PACKAGER%</span><br><span class="line">Robin Candau &lt;antiz@archlinux.org&gt;</span><br><span class="line"></span><br><span class="line">%URL%</span><br><span class="line">https://gcc.gnu.org/</span><br><span class="line"></span><br><span class="line">%LICENSE%</span><br><span class="line">GPL</span><br><span class="line">LGPL</span><br><span class="line">FDL</span><br></pre></td></tr></table></figure>
+
+<p>这是编译时间戳。转换成人类可读时间大约是 2026 年 4 月。</p>
+<p>这是维护并编译这个包的 Arch 官方开发者（Trusted User &#x2F; Developer）。这里是 Robin Candau 大佬。</p>
+<p>项目官方网站。当你用 <code>pacman -Qi</code> 查看时就会显示这个。</p>
+<p>软件开源许可证。GCC 核心组件采用 GPL，运行时库采用 LGPL，文档采用 FDL。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%ARCH%</span><br><span class="line">x86_64</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>核心理解：</strong> <strong>注意！这里写的是 <code>x86_64</code>，而不是 <code>aarch64</code>！</strong> * 为什么？因为这个编译器是<strong>运行在你的 Intel&#x2F;AMD 电脑上</strong>的。它的“执行主体”是 x86_64 代码，只是它“吐出来的二进制文件”是 ARM64 代码。不要被名字里的 aarch64 迷惑了，它依然是一个不折不扣的 x86_64 原生程序。</li>
+</ul>
+<h2 id="三、-图论交织：依赖树的核心"><a href="#三、-图论交织：依赖树的核心" class="headerlink" title="三、 图论交织：依赖树的核心"></a>三、 图论交织：依赖树的核心</h2><p>这里是整个文件技术含金量最高、也是最有趣的地方：</p>
+<p>Plaintext</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%DEPENDS%</span><br><span class="line">aarch64-linux-gnu-binutils</span><br><span class="line">aarch64-linux-gnu-glibc</span><br><span class="line">libmpc</span><br><span class="line">zlib</span><br><span class="line">libisl</span><br><span class="line">zstd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>含义：</strong> 运行时依赖。</li>
+<li><strong>深度拆解：</strong> 1. 你会发现它依赖 <code>aarch64-linux-gnu-binutils</code>（ARM64 的汇编器和链接器 <code>as</code>、<code>ld</code>）和 <code>aarch64-linux-gnu-glibc</code>（ARM64 的 C 标准库头文件和库）。 2. 编译器编译代码时，必须要知道目标机器的 C 语言基本函数（如 <code>printf</code>）在 ARM64 下是怎么定义的，所以它把这两个交叉工具链组件作为强依赖。 3. <code>libmpc</code>、<code>libisl</code>、<code>zstd</code> 则是 GCC 本身运行需要的高级数学库和压缩库。</li>
+</ul>
+<p>Plaintext</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%MAKEDEPENDS%</span><br><span class="line">gmp</span><br><span class="line">mpfr</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>思考题：等等！你上一把不是说 <code>desc</code> 里一般没有 <code>%MAKEDEPENDS%</code> 吗？这里怎么冒出来了？</strong></li>
+<li><strong>硬核真相：</strong> 在 Arch 官方的 <code>extra</code> 仓库设计中，如果你看到 <code>desc</code> 里依然保留了 <code>%MAKEDEPENDS%</code>，通常有两种可能：<ol>
+<li><strong>打包自动化工具的残留：</strong> 官方工具在生成仓库数据库时，部分复杂的交叉编译包或多阶段构建包（Bootstrap 包），其构建依赖被直接索引进了元数据里。</li>
+<li><strong>用于给源码构建（如 <code>makepkg -s</code>）或某些特殊元数据追踪工具提供参考：</strong> 让高级用户或链式构建工具知道，如果想从源码重新编译这个交叉编译器，本地必须先安装 <code>gmp</code> 和 <code>mpfr</code> 这两个多精度浮点运算库。</li>
+</ol>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>当你运行 <code>pacman -Sy</code> 时，<code>pacman</code> 会根据 <code>/etc/pacman.conf</code> 里的镜像源地址，下载最新的 <code>core.db</code>、<code>extra.db</code> 等文件。</p>
+<ul>
+<li>这些 <code>.db</code> 文件表面上是数据库，实际上只是<strong>压缩过的 <code>.tar.gz</code> 纯文本包</strong>。</li>
+<li>解压后，每个软件对应一个文件夹，里面只有几个名为 <code>desc</code>（描述信息、版本、依赖、体积）和 <code>depends</code>（依赖列表）的纯文本文件。</li>
+<li><strong>原理：</strong> <code>pacman</code> 找软件时，不联网查询，而是直接用 C 语言的字符串匹配算法，在这些本地文本文件里翻找。</li>
+</ul>
+<h5 id="-1"><a href="#-1" class="headerlink" title=""></a></h5><p>这里记录了你电脑上当前安装的所有软件。</p>
+<ul>
+<li>每个安装的软件都有一个目录，里面除了 <code>desc</code>，还有一个至关重要的文件：<strong><code>files</code></strong>。</li>
+<li><code>files</code> 文件里精确列出了这个软件在你的系统里创建的<strong>每一个文件、每一个软链接、每一个目录的绝对路径</strong>（例如 <code>usr/bin/bash</code>）。</li>
+<li><strong>原理：</strong> 为什么 <code>pacman -R</code> 能删得干干净净？为什么 <code>pacman -Qo /path/to/file</code> 能一秒查出某个文件属于哪个包？就是因为 <code>pacman</code> 只需要去遍历 <code>local/</code> 下这些文本文件里的路径列表。</li>
+</ul>
+<h2 id="深度剖析：pacman-S-的执行全流程"><a href="#深度剖析：pacman-S-的执行全流程" class="headerlink" title="深度剖析：pacman -S &lt;package&gt; 的执行全流程"></a>深度剖析：<code>pacman -S &lt;package&gt;</code> 的执行全流程</h2><p>当你敲下安装命令并回车时，底层会经历 5 个阶段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[输入命令] ──&gt; 1. 依赖求解 (ALPM) ──&gt; 2. 冲突检测 ──&gt; 3. 下载 Tarball ──&gt; 4. 解压与文件释放 ──&gt; 5. 挂钩 (Hooks) 触发</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-依赖求解（Dependency-Resolution）"><a href="#1-依赖求解（Dependency-Resolution）" class="headerlink" title="1. 依赖求解（Dependency Resolution）"></a>1. 依赖求解（Dependency Resolution）</h3><p><code>pacman</code> 调用的核心底层库叫 <strong>libalpm</strong> (Arch Linux Package Management library)。</p>
+<ul>
+<li>它会在本地的 <code>sync/</code> 目录中找到目标包的 <code>desc</code> 文件，读取它的 <code>DEPENDS</code> 字段。</li>
+<li>如果有依赖，它会递归地去把依赖的 <code>desc</code> 也找出来，在内存中构建一棵<strong>有向无环图 (DAG)</strong>。</li>
+<li>利用拓扑排序（Topological Sort），计算出一个完美的安装顺序（必须先安装底层依赖，最后安装目标软件）。</li>
+</ul>
+<h3 id="2-检查冲突（Transaction-Preparation）"><a href="#2-检查冲突（Transaction-Preparation）" class="headerlink" title="2. 检查冲突（Transaction Preparation）"></a>2. 检查冲突（Transaction Preparation）</h3><p>在真正动手之前，<code>pacman</code> 会做两项严格的检查：</p>
+<ul>
+<li><strong>盘点磁盘文件冲突：</strong> 它会把所有即将安装的软件的 <code>files</code> 列表拿出来，和本地文件系统对比。如果发现某个文件已经存在，且不属于任何已安装的包（或者是别的包生成的），<code>pacman</code> 会立刻报错终止（报错提示：<code>exists in filesystem</code>），绝对不盲目覆盖。</li>
+<li><strong>检查互相排斥（Conflicts）：</strong> 比如你装了 <code>openssl</code>，另一个包声明了 <code>conflicts = openssl</code>，它会提示你是否替换。</li>
+</ul>
+<h3 id="3-下载软件包（Downloading）"><a href="#3-下载软件包（Downloading）" class="headerlink" title="3. 下载软件包（Downloading）"></a>3. 下载软件包（Downloading）</h3><p><code>pacman</code> 默认调用内建的下载函数（也可以在配置里改成 <code>aria2</code> 或 <code>curl</code>），去镜像源下载对应的软件包。</p>
+<ul>
+<li>Arch 的软件包后缀通常是 <code>.pkg.tar.zst</code>。</li>
+<li><strong>它其实就是一个用 <code>zstd</code> 高效压缩过的普通 tar 归档包。</strong></li>
+</ul>
+<h3 id="4-解压与释放（Extraction）"><a href="#4-解压与释放（Extraction）" class="headerlink" title="4. 解压与释放（Extraction）"></a>4. 解压与释放（Extraction）</h3><p>下载完成后，<code>pacman</code> 开始“解包”。</p>
+<ul>
+<li>它会按照计算好的顺序，直接把 <code>.pkg.tar.zst</code> 解压到系统的根目录 <code>/</code> 下。可执行文件直接落入 <code>/usr/bin/</code>，库文件落入 <code>/usr/lib/</code>。</li>
+<li>同时，它会把这个包的元数据和文件列表写入 <code>/var/lib/pacman/local/</code> 中，完成本地数据库的注册。</li>
+</ul>
+<h3 id="5-运行挂钩（Pacman-Hooks）"><a href="#5-运行挂钩（Pacman-Hooks）" class="headerlink" title="5. 运行挂钩（Pacman Hooks）"></a>5. 运行挂钩（Pacman Hooks）</h3><p>文件复制完后，系统还没完全准备好（比如新装了字体，系统还不知道）。这时 <code>pacman</code> 会触发 <code>hooks</code>（位于 <code>/usr/share/libalpm/hooks/</code>）。</p>
+<ul>
+<li>比如触发 <code>ldconfig</code> 刷新动态链接库缓存。</li>
+<li>触发 <code>fontconfig</code> 刷新字体缓存。</li>
+<li>触发 <code>mkinitcpio</code> 重新构建内核镜像（如果是更新了内核）。</li>
+</ul>
+<h2 id="三、-为什么-Arch-会发生“滚烂系统”的情况？"><a href="#三、-为什么-Arch-会发生“滚烂系统”的情况？" class="headerlink" title="三、 为什么 Arch 会发生“滚烂系统”的情况？"></a>三、 为什么 Arch 会发生“滚烂系统”的情况？</h2><p>理解了原理，你就明白为什么 Arch 如果久不更新，一更新就容易“滚烂”（System Breakage）了：</p>
+<ol>
+<li><strong>激进的无版本隔离：</strong> <code>pacman</code> 不像 Debian 那样会保留旧版本的动态链接库（比如 <code>libssl.so.1.1</code> 和 <code>libssl.so.3</code> 共存）。Arch 永远只有一个最新版。如果 A 软件依赖 <code>libssl.so.3</code>，而你更新时因为某些原因漏掉了 A，A 在运行时就会因为找不到旧库直接崩溃（<code>shared object file not found</code>）。</li>
+<li><strong>纯文本数据库的脆弱性：</strong> 如果你在 <code>pacman</code> 正在写入 <code>/var/lib/pacman/local/</code> 时突然断电强行关机，数据库文件可能会损坏或变成 0 字节。此时 <code>pacman</code> 就会“失忆”，不知道本地装了什么，导致下次更新时疯狂报 <code>exists in filesystem</code> 冲突。</li>
+</ol>
+<h2 id="四、-总结：Pacman-的设计哲学"><a href="#四、-总结：Pacman-的设计哲学" class="headerlink" title="四、 总结：Pacman 的设计哲学"></a>四、 总结：Pacman 的设计哲学</h2><blockquote>
+<p><strong>“Keep It Simple, Keep It Lightweight.”</strong></p>
+</blockquote>
+<p><code>pacman</code> 的强大和高效，正是因为它没有二心：它不帮你做复杂的容器隔离，不搞花哨的图形界面驱动，它只做一件事——<strong>安全、快速地把一个远程的 tar 压缩包，解压到你的根目录下，并用纯文本账本记下来。</strong> 正因如此，它才能成为 Linux 社区中最快、最受极客喜爱的包管理器之一。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2026/06/12/magic-use-of-pacman-md/"
+                                   title="pacman的一些玩法"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">pacman的一些玩法</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2026/06/05/build-your-own-shell-md/"
+                                   title="打造你自己的 Linux Shell！"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">打造你自己的 Linux Shell！</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pacman%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">pacman工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%88%87%E7%9A%86%E5%9C%A8-var-lib-pacman"><span class="nav-number">1.1.</span> <span class="nav-text">一切皆在 &#x2F;var&#x2F;lib&#x2F;pacman&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E5%9B%BE%E8%AE%BA%E4%BA%A4%E7%BB%87%EF%BC%9A%E4%BE%9D%E8%B5%96%E6%A0%91%E7%9A%84%E6%A0%B8%E5%BF%83"><span class="nav-number">2.</span> <span class="nav-text">三、 图论交织：依赖树的核心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#-1"><span class="nav-number">3.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%EF%BC%9Apacman-S-%E7%9A%84%E6%89%A7%E8%A1%8C%E5%85%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">深度剖析：pacman -S &lt;package&gt; 的执行全流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BE%9D%E8%B5%96%E6%B1%82%E8%A7%A3%EF%BC%88Dependency-Resolution%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">1. 依赖求解（Dependency Resolution）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A3%80%E6%9F%A5%E5%86%B2%E7%AA%81%EF%BC%88Transaction-Preparation%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">2. 检查冲突（Transaction Preparation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%8C%85%EF%BC%88Downloading%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">3. 下载软件包（Downloading）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%A7%A3%E5%8E%8B%E4%B8%8E%E9%87%8A%E6%94%BE%EF%BC%88Extraction%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">4. 解压与释放（Extraction）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BF%90%E8%A1%8C%E6%8C%82%E9%92%A9%EF%BC%88Pacman-Hooks%EF%BC%89"><span class="nav-number">4.5.</span> <span class="nav-text">5. 运行挂钩（Pacman Hooks）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E4%B8%BA%E4%BB%80%E4%B9%88-Arch-%E4%BC%9A%E5%8F%91%E7%94%9F%E2%80%9C%E6%BB%9A%E7%83%82%E7%B3%BB%E7%BB%9F%E2%80%9D%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">三、 为什么 Arch 会发生“滚烂系统”的情况？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E6%80%BB%E7%BB%93%EF%BC%9APacman-%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6"><span class="nav-number">6.</span> <span class="nav-text">四、 总结：Pacman 的设计哲学</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Alexander Hou</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pacman%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">pacman工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%88%87%E7%9A%86%E5%9C%A8-var-lib-pacman"><span class="nav-number">1.1.</span> <span class="nav-text">一切皆在 &#x2F;var&#x2F;lib&#x2F;pacman&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E5%9B%BE%E8%AE%BA%E4%BA%A4%E7%BB%87%EF%BC%9A%E4%BE%9D%E8%B5%96%E6%A0%91%E7%9A%84%E6%A0%B8%E5%BF%83"><span class="nav-number">2.</span> <span class="nav-text">三、 图论交织：依赖树的核心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#-1"><span class="nav-number">3.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%EF%BC%9Apacman-S-%E7%9A%84%E6%89%A7%E8%A1%8C%E5%85%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">深度剖析：pacman -S &lt;package&gt; 的执行全流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BE%9D%E8%B5%96%E6%B1%82%E8%A7%A3%EF%BC%88Dependency-Resolution%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">1. 依赖求解（Dependency Resolution）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A3%80%E6%9F%A5%E5%86%B2%E7%AA%81%EF%BC%88Transaction-Preparation%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">2. 检查冲突（Transaction Preparation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%8C%85%EF%BC%88Downloading%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">3. 下载软件包（Downloading）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%A7%A3%E5%8E%8B%E4%B8%8E%E9%87%8A%E6%94%BE%EF%BC%88Extraction%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">4. 解压与释放（Extraction）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BF%90%E8%A1%8C%E6%8C%82%E9%92%A9%EF%BC%88Pacman-Hooks%EF%BC%89"><span class="nav-number">4.5.</span> <span class="nav-text">5. 运行挂钩（Pacman Hooks）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E4%B8%BA%E4%BB%80%E4%B9%88-Arch-%E4%BC%9A%E5%8F%91%E7%94%9F%E2%80%9C%E6%BB%9A%E7%83%82%E7%B3%BB%E7%BB%9F%E2%80%9D%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">三、 为什么 Arch 会发生“滚烂系统”的情况？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E6%80%BB%E7%BB%93%EF%BC%9APacman-%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6"><span class="nav-number">6.</span> <span class="nav-text">四、 总结：Pacman 的设计哲学</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Alexander Hou">
+    
+    <title>
+        
+            打造你自己的 Linux Shell！ |
+        
+        Alexander Hou&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#1793d1","title":"Alexander Hou's blog","author":"Alexander Hou","avatar":"/images/avatar.jpg","logo":null,"favicon":null},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep it simple, stupid.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/Alexander-Hou","weixin":"img | ./images/wechat.jpg","qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":false,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2026,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Alexander Hou&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        打造你自己的 Linux Shell！
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Alexander Hou</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2026-06-05 16:58:25</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Thu Jun 11 2026 14:24:14 GMT+0800">2026-06-11 14:24:14</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/shell/">shell</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>在这个文章中，我们将用C语言从零开始写一个属于自己的简单的Linux Shell（命令解释器）。对于系统程序员、内核爱好者或任何想深入掌握计算机底层的人来说，自己动手写一个 Shell 的意义，绝不仅仅是为了重复造一个 <code>bash</code>  的轮子。Shell的真正价值在于，它是连接“用户态纯文本”与“内核态系统调用”之间最完美的桥梁。也许这个Shell的功能远远不如工业级的<code>bash</code>，但是在实现Shell的过程中，我们会学到很多很多。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对于每一位系统程序员或 Linux 爱好者来说，终端都是一个神奇的“黑盒”。我们每天都会输入无数像这样的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&quot;.c&quot;</span> &gt; output.txt &amp;&amp; <span class="built_in">cat</span> output.txt</span><br></pre></td></tr></table></figure>
+
+<p>键盘上的回车键就像一道咒语，按下它的瞬间，屏幕闪烁，复杂的流水线、重定向和逻辑判断便在顷刻间完成。你是否曾想过：</p>
+<ul>
+<li>终端如何解析这串冗长而复杂的符号？</li>
+<li><code>|</code>（流水线）背后的内核级数据流是什么？</li>
+<li><code>&amp;&amp;</code> 和 <code>||</code> 如何在进程级实现条件短路？</li>
+</ul>
+<p>学习最有效的方法就是自己动手。本系列博客将从零开始，指导你使用纯 C 语言实现一个现代简易命令解释器。</p>
+<h3 id="一些简单的准备工作：磨刀不误砍柴工"><a href="#一些简单的准备工作：磨刀不误砍柴工" class="headerlink" title="一些简单的准备工作：磨刀不误砍柴工"></a>一些简单的准备工作：磨刀不误砍柴工</h3><p>由于我们将大量使用 Linux 系统调用（如 <code>fork</code>、<code>pipe</code> 等），因此原生 Linux 环境必不可少（我使用的是 Arch Linux，本系列中的所有代码均已在 Arch Linux 上经过测试）。如果您使用的是 Windows，请务必配置好 WSL2。此外，您还需要 <code>gcc</code> 编译器和 <code>make</code> 构建工具。除了 <code>gcc</code> 和 <code>make</code>，我们还将使用符合 POSIX.1-2008 标准的 API（例如 <code>getline</code>），因此原生 Linux 环境能让您免去处理跨平台兼容性问题的诸多麻烦。代码本身采用纯 C 语言编写，您可以使用 Vim、Neovim 或 VS Code 等经典编辑器进行开发。</p>
+<h3 id="核心本质：Shell-本质上就是一个永不停息的循环。"><a href="#核心本质：Shell-本质上就是一个永不停息的循环。" class="headerlink" title="核心本质：Shell 本质上就是一个永不停息的循环。"></a>核心本质：Shell 本质上就是一个永不停息的循环。</h3><p>剥离复杂的语法解析和进程控制后，任何 shell 的底层框架都非常简单。它的本质可以概括为一个无限循环（通常称为 REPL：读取-求值-打印循环）。</p>
+<p>在我们即将实现的 shell 中，主函数中的这个循环如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    print_prompt();     <span class="comment">// 1. Print prompt</span></span><br><span class="line">    <span class="type">char</span> *line = read_line();     <span class="comment">// 2. Read: Get user input</span></span><br><span class="line">    <span class="keyword">if</span> (!line) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">    Token *tokens = tokenize(line);     <span class="comment">// 3. Lex: Lexical Analysis</span></span><br><span class="line">    <span class="keyword">if</span> (!tokens) &#123; </span><br><span class="line">        <span class="built_in">free</span>(line); </span><br><span class="line">        <span class="keyword">continue</span>; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node *ast = parse(tokens);     <span class="comment">// 4. Parse: Syntax analysis (constructing the Abstract Syntax Tree)</span></span><br><span class="line">    <span class="keyword">if</span> (!ast) &#123; </span><br><span class="line">        <span class="built_in">free</span>(tokens); </span><br><span class="line">        <span class="built_in">free</span>(line); </span><br><span class="line">        <span class="keyword">continue</span>; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> status = execute(ast);     <span class="comment">// 5. Eval: Execute the abstract syntax tree</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 6. Clean: Free up memory to prepare for the next loop.</span></span><br><span class="line">    free_tree(ast);</span><br><span class="line">    <span class="built_in">free</span>(tokens);</span><br><span class="line">    <span class="built_in">free</span>(line);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="架构设计：四大模块之间明确的分工"><a href="#架构设计：四大模块之间明确的分工" class="headerlink" title="架构设计：四大模块之间明确的分工"></a>架构设计：四大模块之间明确的分工</h3><p>为了确保系统稳健且易于维护，我采用了 KISS 原则（保持简单）作为核心指导方针，将复杂的命令处理流水线解耦为四个职责单一的独立经典模块：读取器、词法分析器、语法分析器和执行器。该项目的核心架构设计如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[User Input] </span><br><span class="line">     │</span><br><span class="line">     ▼</span><br><span class="line">┌───────────┐</span><br><span class="line">│ reader.c  │ ──► Use `getline` to dynamically read and process input boundaries (`EOF`/`EINTR`).</span><br><span class="line">└───────────┘</span><br><span class="line">     │</span><br><span class="line">     ▼ (Command String)</span><br><span class="line">┌───────────┐</span><br><span class="line">│  lexer.c  │ ──► State machine-based token segmentation generates a flat array of tokens.</span><br><span class="line">└───────────┘</span><br><span class="line">     │</span><br><span class="line">     ▼ (Token Stream)</span><br><span class="line">┌───────────┐</span><br><span class="line">│ parser.c  │ ──► Recursive descent parsing to construct an abstract syntax tree (AST)</span><br><span class="line">└───────────┘</span><br><span class="line">     │</span><br><span class="line">     ▼ (Abstract Syntax Tree)</span><br><span class="line">┌───────────┐</span><br><span class="line">│executor.c │ ──► `fork`/`execvp` execution, short-circuit evaluation, pipelining and redirection</span><br><span class="line">└───────────┘</span><br><span class="line">     │</span><br><span class="line">     ▼</span><br><span class="line">[Memory reclamation]   ──► The main loop executes `cleanup_iteration` to release all heap resources for this iteration.</span><br></pre></td></tr></table></figure>
+
+<p>本系列文章旨在通过模块化设计，帮助读者理解 Linux 的底层机制。受限于博客篇幅，文章将重点讲解核心逻辑与代码演变过程。如需获取包含详细注释的完整代码，请访问项目的 GitHub 仓库：<a class="link"   target="_blank" rel="noopener" href="https://github.com/Alexander-Hou/hsh" >https://github.com/Alexander-Hou/hsh<i class="fas fa-external-link-alt"></i></a> 。建议您在阅读各章节内容时，同步查阅该仓库中的相关代码。</p>
+<h2 id="第一章：读取器——捕获字符串"><a href="#第一章：读取器——捕获字符串" class="headerlink" title="第一章：读取器——捕获字符串"></a>第一章：读取器——捕获字符串</h2><p>虽然<code>reader.c</code>（读取器）只有几十行代码，但它是 Shell 操作的“基础”。看似简单的读取操作，实际上需要系统级编程中考虑诸多细节。本章将阐述我编写这个读取器的过程。</p>
+<h3 id="选择-getline-的原因"><a href="#选择-getline-的原因" class="headerlink" title="选择 getline 的原因"></a>选择 getline 的原因</h3><p>读取器的主要功能是完整捕获用户输入的整行命令。初学 C 语言时，我们都用过 <code>scanf</code>；但在编写成熟的 Shell 脚本时，<code>scanf</code> 却往往令人头疼，因为它会将空格视为输入结束的标志。这意味着当我们输入 <code>ls -l</code> 时，它只会读取到 “ls”。此外，老旧的 <code>gets</code> 函数无法限制输入长度，容易引发缓冲区溢出——这可是众所周知的安全漏洞隐患。显然，这两个函数都不适合我们的 Shell。</p>
+<p>为了完整捕获用户输入的整行命令（包括空格和制表符等特殊字符）且不限制命令长度，我们必须使用 POSIX 标准中的现代工具：<code>getline</code>。让我们来看看 <code>getline</code> 的函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">getline</span><span class="params">(<span class="type">char</span> **<span class="keyword">restrict</span> lineptr, <span class="type">size_t</span> *<span class="keyword">restrict</span> n, FILE *<span class="keyword">restrict</span> stream)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>它的精妙之处在于动态调整内存大小。如果传递一个值为 <code>NULL</code> 的指针，它会在底层使用 <code>malloc</code> 自动分配内存；如果用户输入的命令异常长，它也会自动调用 <code>realloc</code> 来调整内存大小。这意味着我们的 shell 从本质上避免了“固定缓冲区溢出”的问题。</p>
+<p>这样，我们就可以编写 <code>read_line</code> 函数的初始版本了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">read_line</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *line = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">size_t</span> bufsize = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        Read a line of input from the user.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    getline(&amp;line, &amp;bufsize, <span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        Remove the trailing newline character, if present.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">	<span class="keyword">if</span> (line[ret - <span class="number">1</span>] == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        line[ret - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> line;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这就是 <code>getline</code> 的神奇之处：无需编写复杂的循环来重新配置缓冲区，只需一行代码，它就能在堆上分配内存并容纳整行输入。如果理想情况总是完美无缺，我们的读取器写到这里也就大功告成了。但作为系统程序员，我们必须面对残酷的现实——万一用户不按常理出牌呢？</p>
+<h3 id="处理-Ctrl-D-EOF"><a href="#处理-Ctrl-D-EOF" class="headerlink" title="处理 Ctrl+D (EOF)"></a>处理 Ctrl+D (EOF)</h3><p>第一个实际挑战来自用户的退出意图。当用户在终端按下 <code>Ctrl+D</code> 时，他们并未输入任何字符，而是关闭了标准输入流（即触发了 <code>EOF</code>）。在之前的极简代码中，<code>getline</code> 遇到 <code>EOF</code> 时会返回 -1；然而，我们的代码对此毫无准备，会直接向外部解析器返回一个空的 <code>line</code> 指针，这必然导致段错误（segmentation fault）。因此，我们增加了第一道防线：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">read_line</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *line = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">size_t</span> bufsize = <span class="number">0</span>;</span><br><span class="line">    <span class="type">ssize_t</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        Read a line of input from the user,</span></span><br><span class="line"><span class="comment">        handling interrupts and end-of-file conditions.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    ret = getline(&amp;line, &amp;bufsize, <span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ret == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (feof(<span class="built_in">stdin</span>)) <span class="comment">// End of file (Ctrl+D)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">free</span>(line);</span><br><span class="line">            <span class="keyword">if</span> (isatty(STDIN_FILENO))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        Remove the trailing newline character, if present.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span> (ret &gt; <span class="number">0</span> &amp;&amp; line[ret - <span class="number">1</span>] == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        line[ret - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> line;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此外，我来解释一下 <code>isatty</code> 的作用。它用于判断当前的标准输入是否为真正的交互式终端。如果用户在终端上手动输入命令并按下 <code>Ctrl+D</code> 退出，打印换行符（<code>\n</code>）能保持界面整洁；反之，如果我们的 shell 正在执行脚本文件（即重定向输入，如 <code>./hsh &lt; script.sh</code>），<code>isatty</code> 的结果将为假（false），因此我们无需向标准输出添加多余的换行符。这体现了软件设计中的考究之处。</p>
+<p>经过这一演进，我们的 shell 现已具备了“优雅退出”的能力。当检测到 <code>feof(stdin)</code> 时，我们会释放内存并返回 <code>NULL</code>；随后，只要返回值是 <code>NULL</code>，外层主循环便能干净利落地结束程序。</p>
+<h3 id="处理-Ctrl-C"><a href="#处理-Ctrl-C" class="headerlink" title="处理 Ctrl+C"></a>处理 Ctrl+C</h3><p>接下来，我们将面对最棘手的对手——Linux 信号中断。试想这样一个场景：我们的 shell 正停留在 <code>getline</code> 处等待用户输入。突然，用户意识到命令输错了，于是手忙脚乱地按下了 <code>Ctrl+C</code>。此时，操作系统内核会向我们的 shell 发送一个 <code>SIGINT</code> 信号。默认情况下，该信号会导致进程终止。但我们要打造的是一个“宽宏大量”的 shell，希望它能像暴风雨中坚韧的小草一样——虽受干扰，却不折断。当信号触发并被捕获（或者系统调用被中断）时，<code>getline</code> 会无奈地返回 -1。不过此时，<code>feof</code> 的值为假，且全局变量 <code>errno</code> 会被标记为特定标志：<code>EINTR</code>（表示系统调用被中断）。为了在中断后恢复运行，我们必须将整个读取逻辑包裹在一个 <code>while(1)</code> 循环中，并清除错误状态：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">read_line</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *line = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">size_t</span> bufsize = <span class="number">0</span>;</span><br><span class="line">    <span class="type">ssize_t</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        Read a line of input from the user,</span></span><br><span class="line"><span class="comment">        handling interrupts and end-of-file conditions.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ret = getline(&amp;line, &amp;bufsize, <span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ret == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (feof(<span class="built_in">stdin</span>)) <span class="comment">// End of file (Ctrl+D)</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">free</span>(line);</span><br><span class="line">                <span class="keyword">if</span> (isatty(STDIN_FILENO))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (errno == EINTR) <span class="comment">// Interrupted by signal (e.g., Ctrl+C)</span></span><br><span class="line">            &#123;</span><br><span class="line">                clearerr(<span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">                <span class="built_in">free</span>(line);</span><br><span class="line">                line = <span class="literal">NULL</span>;</span><br><span class="line">                bufsize = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            perror(<span class="string">&quot;hsh: fatal error reading input&quot;</span>);</span><br><span class="line">            <span class="built_in">free</span>(line);</span><br><span class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        Remove the trailing newline character, if present.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span> (ret &gt; <span class="number">0</span> &amp;&amp; line[ret - <span class="number">1</span>] == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        line[ret - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> line;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从这三个版本的演变可以看出，在编写生产级系统级 C 代码时，真正的核心逻辑往往只占代码总量的 20%，而其余 80% 的精力都花在了应对各种棘手的异常、信号及内存边界问题上。正是这 80% 的“防御性代码”，才会使我们的命令行解释器更加健壮。</p>
+<h2 id="第二章：词法分析器——词法分析与状态机"><a href="#第二章：词法分析器——词法分析与状态机" class="headerlink" title="第二章：词法分析器——词法分析与状态机"></a>第二章：词法分析器——词法分析与状态机</h2><p>编写好读取器之后，我们已经能够安全且完整地将用户输入的一行内容捕获到堆内存中。然而，对于操作系统而言，这串字符仅仅是“死板的纯文本”。在本章中，我们将化身为“字符串拆解大师”，深入剖析命令解释器的第二个核心模块——<code>lexer.c</code>（词法分析器）。我们将展示如何利用有限状态机（FSM）的概念，将杂乱无章的原始字符流精确地分解为具有独立语义的“记号”（token）。为了避免读者在面对具体的解析状态转换时迷失方向，我们将首先从 <code>lexer.h</code> 入手，剖析整个词法分析过程的“顶层设计”与“骨架结构”。</p>
+<h3 id="引言：什么是词法分析？"><a href="#引言：什么是词法分析？" class="headerlink" title="引言：什么是词法分析？"></a>引言：什么是词法分析？</h3><p>当我们输入像这样的命令时：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&quot;txt&quot;</span> &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;done&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>人的眼睛会自动将 <code>ls</code> 识别为命令，<code>-l</code> 识别为参数，<code>|</code> 识别为管道，并将 <code>&quot;txt&quot;</code> 识别为一个由双引号括起来的整体。但在计算机眼中，它看到的只是一串简单、连续的字符：</p>
+<p><code>[&#39;l&#39;, &#39;s&#39;, &#39; &#39;, &#39;-&#39;, &#39;l&#39;, &#39; &#39;, &#39;|&#39;, &#39; &#39;, ...]</code></p>
+<p>词法分析器的核心职责是从左向右扫描该数组——就像切香肠一样——滤除无意义的空格，并将字符重新组合成一系列带有标记的语义单元（token）。</p>
+<p>经过 <code>lexer.c</code> 处理后，上述命令将被转换为一个记号（token）数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[TOKEN_WORD(&quot;ls&quot;), TOKEN_WORD(&quot;-l&quot;), TOKEN_PIPE, TOKEN_WORD(&quot;txt&quot;), TOKEN_AND_IF, TOKEN_WORD(&quot;done&quot;)]</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心数据结构"><a href="#核心数据结构" class="headerlink" title="核心数据结构"></a>核心数据结构</h3><p>在编写具体的分割代码之前，我们需要确立“游戏规则”。请打开头文件 <code>lexer.h</code>，其中定义了词法分析器的三大支柱：Token 类型、Token 实体，以及支撑状态机运行的上下文。</p>
+<p>首先，我们需要为 Shell 中可能出现的所有基本符号定义“身份证类型”。我使用了枚举（enumeration）来定义 <code>TokenType</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">TokenType</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TOKEN_WORD,</span><br><span class="line">    TOKEN_PIPE,</span><br><span class="line">    TOKEN_REDIR_IN,</span><br><span class="line">    TOKEN_REDIR_OUT,</span><br><span class="line">    TOKEN_REDIR_APPEND,</span><br><span class="line">    TOKEN_AND_IF,</span><br><span class="line">    TOKEN_OR_IF,</span><br><span class="line">    TOKEN_SEMICOLON,</span><br><span class="line">    TOKEN_END</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> <span class="title">TokenType</span> <span class="title">TokenType</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>在定义好类型之后，下一步是将“类型”与“原始字符串内容”封装在一个结构体中，从而定义 Token 的载体：<code>struct Token</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Token</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TokenType type;</span><br><span class="line">    <span class="type">char</span> *value;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Token</span> <span class="title">Token</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>许多编写词法分析代码的初学者往往使用极其冗长的函数参数，需要不断传递 <code>char buf</code>、<code>int *pos</code> 和 <code>int *count</code>。这种做法不仅容易出错，还会导致代码显得杂乱难看。为了保持代码的优雅与简洁，我将词法分析过程中需要维护的所有局部变量封装进了一个名为 <code>LexContext</code> 的上下文结构体中。这样一来，在编写处理各种特殊符号的函数时，只需传递一个上下文指针即可。这种针对 <code>LexContext</code> 的面向对象设计将极大地简化后续代码的编写工作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LexContext</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">char</span> *buf;          <span class="comment">// Raw command input buffer</span></span><br><span class="line">    Token *tokens;      <span class="comment">// A dynamically allocated array of tokens (used to store the split results).</span></span><br><span class="line">    <span class="type">int</span> capacity;       <span class="comment">// The current capacity of the Token array (for dynamic expansion).</span></span><br><span class="line">    <span class="type">int</span> token_start;    <span class="comment">// The starting index of the word currently being segmented in buf</span></span><br><span class="line">    <span class="type">int</span> count;          <span class="comment">// Number of tokens already split</span></span><br><span class="line">    <span class="type">int</span> i;              <span class="comment">// Scan pointer: The index of the raw character currently being scanned.</span></span><br><span class="line">    <span class="type">int</span> j;              <span class="comment">// Padding pointers: When handling escape sequences/quotes in-place, write the index of the new character.</span></span><br><span class="line">    LexState state;     <span class="comment">// The current state of the state machine</span></span><br><span class="line">    <span class="type">bool</span> is_accumulate; <span class="comment">// Flag: Whether a TOKEN_WORD is currently being collected.</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LexContext</span> <span class="title">LexContext</span>;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="有限状态机（FSM）简介"><a href="#有限状态机（FSM）简介" class="headerlink" title="有限状态机（FSM）简介"></a>有限状态机（FSM）简介</h3><p>在深入研究代码之前，我们先来探讨一下编译器理论中一个著名的数学模型——有限状态机（FSM）。这个概念听起来很高深，但实际上它在我们的生活中随处可见。以我们每天都会用到的自动售货机为例：它最初处于“待机&#x2F;未投币”状态；当你投入硬币时，它会转变为“已投币&#x2F;等待选择”状态；如果你按下商品按钮且余额充足，它就会出货并返回“待机”状态。</p>
+<p>在编译器理论的词法分析阶段，状态机发挥着同样的作用。它的核心由三个要素构成：第一是“状态”——即程序的当前状况（例如，正在读取普通文本，还是读取双引号内的文本）；第二是“输入”——即扫描指针当前正在处理的具体字符（例如空格、字母或反斜杠）；第三是“转换”——即当程序处于某种“状态”并遇到某种“输入”时，应切换到哪种“新状态”。</p>
+<p>那么，为什么 Shell 必须使用状态机呢？如果只是处理由空格分隔的单词，我们完全可以使用 C 语言内置的 <code>strtok</code> 函数轻松解决。但 Shell 的复杂之处在于，某些特殊字符可能会改变其他字符的处理方式，而这一切都取决于当前的“上下文（状态）”。让我们来看一个典型的例子。假设用户输入了以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello | world&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果没有状态机，我们的程序会从左到右扫描。当它看到管道符 <code>|</code> 时，会兴奋地喊道：“哈哈！我找到一个管道符（TOKEN_PIPE）！”——但这完全错误！因为这个管道符被双引号包裹着，它实际上变成了一个普通的字符串（TOKEN_WORD）。</p>
+<p>为了让程序具备这种“上下文感知”能力，我们需要在 lexer.h 中为解析器定义 5 种状态：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">LexState</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    STATE_NORMAL,</span><br><span class="line">    STATE_IN_SINGLE_QUOTE,</span><br><span class="line">    STATE_IN_DOUBLE_QUOTE,</span><br><span class="line">    STATE_ESCAPE,</span><br><span class="line">    STATE_ESCAPE_IN_DOUBLE_QUOTE</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> <span class="title">LexState</span> <span class="title">LexState</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>基于编译器原理的这一理论框架，字符解析规则变得一目了然：处于 <code>STATE_NORMAL</code> 状态时，遇到 <code>|</code> 会被视为管道元字符；处于 <code>STATE_IN_DOUBLE_QUOTE</code> 状态时，遇到 <code>|</code> 则仅被视为普通英文字符并进行收集；处于 <code>STATE_NORMAL</code> 状态时，遇到 <code>&quot;</code> 不会被收集，而是触发状态平滑转换为 <code>STATE_IN_DOUBLE_QUOTE</code>。这种由输入字符驱动状态转换的设计，不仅使代码极其优雅，而且在逻辑上无懈可击——这正是编译器原理中自动机模型的魅力所在。</p>
+<h2 id="第三章：词法分析器——状态机的核心实现"><a href="#第三章：词法分析器——状态机的核心实现" class="headerlink" title="第三章：词法分析器——状态机的核心实现"></a>第三章：词法分析器——状态机的核心实现</h2><p>在上一章中，我们确定了统一的上下文结构体 <code>LexContext</code> 以及五种核心的解析状态。本章我们将深入 <code>lexer.c</code> 的核心实现，详细拆解 <code>tokenize()</code> 函数是如何通过有限状态机（FSM）处理各种复杂的边界条件，并介绍如何利用“原位修改（In-place Modification）”的双指针技巧，高效清洗整条命令行字符串。</p>
+<h3 id="tokenize-主循环的架构"><a href="#tokenize-主循环的架构" class="headerlink" title="tokenize 主循环的架构"></a>tokenize 主循环的架构</h3><p><code>tokenize()</code> 函数的本质是一个由当前状态（<code>ctx.state</code>）驱动的选择结构。在展开庞大的具体分支前，我们可以先观察其底层骨架：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Token *<span class="title function_">tokenize</span><span class="params">(<span class="type">char</span> *buf)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 1. Initialize state machine context*/</span></span><br><span class="line">    LexContext ctx;</span><br><span class="line">    ctx.buf = buf;</span><br><span class="line">    ctx.capacity = HSH_TOKEN_BUF_SIZE; <span class="comment">// The initial capacity is defined as 8.</span></span><br><span class="line">    ctx.count = <span class="number">0</span>;</span><br><span class="line">    ctx.i = <span class="number">0</span>;</span><br><span class="line">    ctx.j = <span class="number">0</span>;</span><br><span class="line">    ctx.is_accumulate = <span class="literal">false</span>;</span><br><span class="line">    ctx.state = STATE_NORMAL;</span><br><span class="line">    ctx.tokens = (Token *)<span class="built_in">malloc</span>(ctx.capacity * <span class="keyword">sizeof</span>(Token));</span><br><span class="line">    <span class="keyword">if</span> (ctx.tokens == <span class="literal">NULL</span>) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 2. State Machine Core Main Loop */</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ctx.state == STATE_IN_SINGLE_QUOTE) &#123;</span><br><span class="line">            <span class="comment">// Single-quote state handling</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ctx.state == STATE_IN_DOUBLE_QUOTE) &#123;</span><br><span class="line">            <span class="comment">// Double-quote state handling</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ctx.state == STATE_ESCAPE_IN_DOUBLE_QUOTE) &#123;</span><br><span class="line">            <span class="comment">// Handling escape states within double quotes</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ctx.state == STATE_ESCAPE) &#123;</span><br><span class="line">            <span class="comment">// Handling escape states in the normal state</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ctx.state == STATE_NORMAL) &#123;</span><br><span class="line">            <span class="comment">// Normal State: Multi-branch Interceptor</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 3. Append an end marker */</span></span><br><span class="line">    ensure_token_capacity(&amp;ctx);</span><br><span class="line">    ctx.tokens[ctx.count].type = TOKEN_END;</span><br><span class="line">    ctx.tokens[ctx.count].value = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ctx.tokens;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在每一轮循环中，主循环只做一件事：观察当前扫描到的字符 <code>ctx.buf[ctx.i]</code>。但同样的字符在不同的状态（<code>ctx.state</code>）下，其解析规则是完全不同的。状态机通过这种分层判断，将原本交织在一起的符号解析逻辑进行了解耦。</p>
+<h3 id="双指针实现原理：i-与-j-的原位清洗"><a href="#双指针实现原理：i-与-j-的原位清洗" class="headerlink" title="双指针实现原理：i 与 j 的原位清洗"></a>双指针实现原理：i 与 j 的原位清洗</h3><p>在处理命令行时，用户经常会输入引号或转义反斜杠（例如 <code>echo &quot;hello \&quot;world\&quot;&quot;</code>）。对于 Shell 而言，外部的双引号、用于转义的反斜杠都属于“语法外壳”，我们最终需要的 <code>TOKEN_WORD</code> 纯文本应当是 <code>hello &quot;world&quot;</code>。</p>
+<p>为了过滤掉这些多余的字符，常规做法是开辟一块临时的堆内存来存放清洗后的内容，但这样会频繁引发内存分配。在 <code>LexContext</code> 中，我们通过引入两个整型指针 <code>ctx.i</code> 和 <code>ctx.j</code>，实现了在原始缓冲区上直接修改字符串。<code>i</code> 是扫描指针（Scan Pointer），负责从左向右遍历原始输入。而<code>j</code> 是填充指针（Padding Pointer），负责指示清洗后的有效文本在缓冲区中的实际写入位置。关键的字符收集函数 <code>accumulate_char</code> 实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">accumulate_char</span><span class="params">(LexContext *ctx)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!ctx-&gt;is_accumulate)</span><br><span class="line">    &#123;</span><br><span class="line">        ctx-&gt;token_start = ctx-&gt;j; <span class="comment">// Record the starting position of the current token after cleaning.</span></span><br><span class="line">        ctx-&gt;is_accumulate = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ctx-&gt;buf[ctx-&gt;j] = ctx-&gt;buf[ctx-&gt;i]; <span class="comment">// Copy valid characters to the fill position.</span></span><br><span class="line">    ctx-&gt;j++;</span><br><span class="line">    ctx-&gt;i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们在 <code>STATE_NORMAL</code>（正常状态）下遇到双引号 <code>&quot;</code> 时，处理逻辑是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (ctx-&gt;buf[ctx-&gt;i] == <span class="string">&#x27;\&quot;&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    ctx-&gt;state = STATE_IN_DOUBLE_QUOTE;</span><br><span class="line">    ctx-&gt;i++; <span class="comment">// Only the scanning pointer i is advanced, while the filling pointer j remains stationary.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过让 <code>i</code> 步进而 <code>j</code> 保持不变，双引号字符在物理上直接被过滤掉了。随后状态切换到 <code>STATE_IN_DOUBLE_QUOTE</code>，后续的有效字符会继续调用 <code>accumulate_char</code> 写入 <code>buf[j]</code> 位置。这种同步覆盖的机制，让我们零额外空间开销地完成了字符串的“脱壳”。</p>
+<h3 id="状态转移与分支处理"><a href="#状态转移与分支处理" class="headerlink" title="状态转移与分支处理"></a>状态转移与分支处理</h3><h4 id="1-正常状态下的符号分流"><a href="#1-正常状态下的符号分流" class="headerlink" title="1. 正常状态下的符号分流"></a>1. 正常状态下的符号分流</h4><p>在 <code>STATE_NORMAL</code> 状态下，词法分析器作为整个解析流程的入口，主要负责对空白字符以及各类运算符（元字符）进行匹配和拦截：</p>
+<ul>
+<li><p><strong>空白字符断句</strong>：</p>
+<p>当检测到空白字符（如空格、制表符）且当前处于记号收集状态（<code>is_accumulate</code> 为真）时，调用 <code>word_end_process</code> 进行封口截断。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">isspace</span>((<span class="type">unsigned</span> <span class="type">char</span>)ctx.buf[ctx.i]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (ctx.is_accumulate)</span><br><span class="line">    &#123;</span><br><span class="line">        word_end_process(&amp;ctx); <span class="comment">// Seal and generate TOKEN_WORD.</span></span><br><span class="line">    &#125;</span><br><span class="line">    ctx.i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>word_end_process</code> 会在 <code>buf[j]</code> 处写入 <code>\0</code>，并通过 <code>strdup</code> 把自 <code>ctx.token_start</code> 开始的、清洗干净的文本拷贝出来，打包成 Token 放入数组。</p>
+</li>
+<li><p><strong>状态触发器</strong>：</p>
+<p>当遇到 <code>&#39;</code>、<code>&quot;</code>、<code>\</code> 时，程序不进行字符收集，而是直接转换 <code>ctx.state</code> 并递增扫描指针 <code>i</code>，实现状态迁移。</p>
+</li>
+<li><p><strong>元字符前瞻匹配（Lookahead）</strong>：</p>
+<p>像 <code>|</code> 与 <code>||</code>、<code>&gt;</code> 与 <code>&gt;&gt;</code> 之间存在识别冲突。状态机采用单字符前瞻机制来消除二义性。以管道符为例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (ctx.buf[ctx.i] == <span class="string">&#x27;|&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (ctx.is_accumulate) &#123; word_end_process(&amp;ctx); &#125; <span class="comment">// Resolve the previous word</span></span><br><span class="line">    <span class="keyword">if</span> (ctx.buf[ctx.i + <span class="number">1</span>] == <span class="string">&#x27;|&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        or_process(&amp;ctx); <span class="comment">// If identified as a logical OR (TOKEN_OR_IF), the pointer steps by 2.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        pipe_process(&amp;ctx); <span class="comment">// Identified as a pipe (TOKEN_PIPE), pointer step 1.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-引号与转义状态下的字符保护"><a href="#2-引号与转义状态下的字符保护" class="headerlink" title="2. 引号与转义状态下的字符保护"></a>2. 引号与转义状态下的字符保护</h4><p>一旦状态切离了 <code>STATE_NORMAL</code>，原本具有特殊政治地位的元字符（如 <code>|</code>, <code>&amp;</code>, <code>&gt;</code>）就会失去特殊语义，被当做普通字符处理。</p>
+<ul>
+<li><p><strong>单引号状态 (<code>STATE_IN_SINGLE_QUOTE</code>)</strong>：</p>
+<p>在单引号内，除了闭合单引号 <code>&#39;</code> 外，所有的字符都会被无条件保护。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ctx.buf[ctx.i] == <span class="string">&#x27;\&#x27;&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    ctx.state = STATE_NORMAL; <span class="comment">// Return to a normal state</span></span><br><span class="line">    ctx.i++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    accumulate_char(&amp;ctx); <span class="comment">// Collect all text within single quotes.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>双引号状态下的嵌套转义</strong>：</p>
+<p>双引号允许内部存在转义（如 <code>\&quot;</code> 或 <code>\\</code>）。因此，如果在 <code>STATE_IN_DOUBLE_QUOTE</code> 状态下遭遇 <code>\</code>，系统需要切换到一个临时的过渡态：<code>STATE_ESCAPE_IN_DOUBLE_QUOTE</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (ctx.buf[ctx.i] == <span class="string">&#x27;\\&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    ctx.state = STATE_ESCAPE_IN_DOUBLE_QUOTE;</span><br><span class="line">    ctx.i++; <span class="comment">// Skip the backslash itself.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在下一轮循环中，程序进入过渡态，此时无论下一个字符是什么，都会通过 <code>accumulate_char</code> 被无条件视为普通文本写入，随后状态自动切回 <code>STATE_IN_DOUBLE_QUOTE</code>。</p>
+</li>
+</ul>
+<h3 id="内存管理与错误处理机制"><a href="#内存管理与错误处理机制" class="headerlink" title="内存管理与错误处理机制"></a>内存管理与错误处理机制</h3><p>编写健壮的系统 C 代码，真正的核心逻辑往往只占一部分，其余绝大部分精力都需要花在应对各类边界异常和内存管理上。</p>
+<h4 id="1-动态数组扩容"><a href="#1-动态数组扩容" class="headerlink" title="1. 动态数组扩容"></a>1. 动态数组扩容</h4><p>Token 数组的初始容量由 <code>HSH_TOKEN_BUF_SIZE</code> 定义。当输入命令较长导致容量不足时，通过 <code>ensure_token_capacity</code> 实现动态扩容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">ensure_token_capacity</span><span class="params">(LexContext *ctx)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (ctx-&gt;count + <span class="number">1</span> &gt;= ctx-&gt;capacity)</span><br><span class="line">    &#123;</span><br><span class="line">        ctx-&gt;capacity *= <span class="number">2</span>;</span><br><span class="line">        Token *tmp = (Token *)<span class="built_in">realloc</span>(ctx-&gt;tokens, ctx-&gt;capacity * <span class="keyword">sizeof</span>(Token));</span><br><span class="line">        <span class="keyword">if</span> (tmp == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">free</span>(ctx-&gt;tokens);</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;hsh: out of memory.\n&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        ctx-&gt;tokens = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该函数使用临时指针 <code>tmp</code> 接收 <code>realloc</code> 的返回值，避免了因内存分配失败导致的原指针丢失与隐式内存泄漏。</p>
+<h4 id="2-词法异常的内存释放"><a href="#2-词法异常的内存释放" class="headerlink" title="2. 词法异常的内存释放"></a>2. 词法异常的内存释放</h4><p>如果用户输入了类似 <code>echo &quot;hello</code> 的畸形命令（即直到文本结束 <code>\0</code>，单&#x2F;双引号仍未闭合），状态机会中途拦截并调用 <code>lex_error</code> 函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> Token *<span class="title function_">lex_error</span><span class="params">(LexContext *ctx, <span class="type">const</span> <span class="type">char</span> *msg)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;hsh: %s\n&quot;</span>, msg);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; ctx-&gt;count; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(ctx-&gt;tokens[k].value); <span class="comment">// Release the local token string allocated for the current iteration.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(ctx-&gt;tokens); <span class="comment">// Free the token container array.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个合格的 Shell 绝不应当因为用户的输入错误而留下隐式内存泄漏。通过遍历清空已分配的堆内存，我们保证了系统在词法分析异常时，能够干净、安全地重置并返回主循环。</p>
+<p>词法分析器完成了从“原始纯文本”到“结构化记号数组”的转换。以命令 <code>ls -l | grep &quot;txt&quot; &amp;&amp; echo &#39;done&#39;</code> 为例，经 <code>lexer.c</code> 处理后，会生成如下离散的记号序列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[TOKEN_WORD(&quot;ls&quot;), TOKEN_WORD(&quot;-l&quot;), TOKEN_PIPE, TOKEN_WORD(&quot;grep&quot;), TOKEN_WORD(&quot;txt&quot;), TOKEN_AND_IF, TOKEN_WORD(&quot;done&quot;), TOKEN_END]</span><br></pre></td></tr></table></figure>
+
+<p>然而，由于此时的记号数组是完全扁平的，操作系统尚无法直接理解命令之间的层次结构与执行流向（例如：谁先执行？谁重定向到哪里？）。下一章我们将进入，利用经典的递归下降算法，将这条扁平的数组搭建为具备层级逻辑的树状结构。</p>
+<h2 id="第四章：语法分析器——递归下降构建抽象语法树（AST）"><a href="#第四章：语法分析器——递归下降构建抽象语法树（AST）" class="headerlink" title="第四章：语法分析器——递归下降构建抽象语法树（AST）"></a>第四章：语法分析器——递归下降构建抽象语法树（AST）</h2>
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2026/06/11/pacman-md/"
+                                   title="pacman的原理"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">pacman的原理</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2026/05/29/cargo-md/"
+                                   title="cargo"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">cargo</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%E7%A3%A8%E5%88%80%E4%B8%8D%E8%AF%AF%E7%A0%8D%E6%9F%B4%E5%B7%A5"><span class="nav-number">1.1.</span> <span class="nav-text">一些简单的准备工作：磨刀不误砍柴工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%AC%E8%B4%A8%EF%BC%9AShell-%E6%9C%AC%E8%B4%A8%E4%B8%8A%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E6%B0%B8%E4%B8%8D%E5%81%9C%E6%81%AF%E7%9A%84%E5%BE%AA%E7%8E%AF%E3%80%82"><span class="nav-number">1.2.</span> <span class="nav-text">核心本质：Shell 本质上就是一个永不停息的循环。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%9D%97%E4%B9%8B%E9%97%B4%E6%98%8E%E7%A1%AE%E7%9A%84%E5%88%86%E5%B7%A5"><span class="nav-number">1.3.</span> <span class="nav-text">架构设计：四大模块之间明确的分工</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E8%AF%BB%E5%8F%96%E5%99%A8%E2%80%94%E2%80%94%E6%8D%95%E8%8E%B7%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.</span> <span class="nav-text">第一章：读取器——捕获字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9-getline-%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.1.</span> <span class="nav-text">选择 getline 的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86-Ctrl-D-EOF"><span class="nav-number">2.2.</span> <span class="nav-text">处理 Ctrl+D (EOF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86-Ctrl-C"><span class="nav-number">2.3.</span> <span class="nav-text">处理 Ctrl+C</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E2%80%94%E2%80%94%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">第二章：词法分析器——词法分析与状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">引言：什么是词法分析？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text">核心数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%EF%BC%88FSM%EF%BC%89%E7%AE%80%E4%BB%8B"><span class="nav-number">3.3.</span> <span class="nav-text">有限状态机（FSM）简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E6%9C%BA%E7%9A%84%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">第三章：词法分析器——状态机的核心实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tokenize-%E4%B8%BB%E5%BE%AA%E7%8E%AF%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="nav-number">4.1.</span> <span class="nav-text">tokenize 主循环的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9Ai-%E4%B8%8E-j-%E7%9A%84%E5%8E%9F%E4%BD%8D%E6%B8%85%E6%B4%97"><span class="nav-number">4.2.</span> <span class="nav-text">双指针实现原理：i 与 j 的原位清洗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E4%B8%8E%E5%88%86%E6%94%AF%E5%A4%84%E7%90%86"><span class="nav-number">4.3.</span> <span class="nav-text">状态转移与分支处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%AD%A3%E5%B8%B8%E7%8A%B6%E6%80%81%E4%B8%8B%E7%9A%84%E7%AC%A6%E5%8F%B7%E5%88%86%E6%B5%81"><span class="nav-number">4.3.1.</span> <span class="nav-text">1. 正常状态下的符号分流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%95%E5%8F%B7%E4%B8%8E%E8%BD%AC%E4%B9%89%E7%8A%B6%E6%80%81%E4%B8%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%BF%9D%E6%8A%A4"><span class="nav-number">4.3.2.</span> <span class="nav-text">2. 引号与转义状态下的字符保护</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6"><span class="nav-number">4.4.</span> <span class="nav-text">内存管理与错误处理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84%E6%89%A9%E5%AE%B9"><span class="nav-number">4.4.1.</span> <span class="nav-text">1. 动态数组扩容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%AF%8D%E6%B3%95%E5%BC%82%E5%B8%B8%E7%9A%84%E5%86%85%E5%AD%98%E9%87%8A%E6%94%BE"><span class="nav-number">4.4.2.</span> <span class="nav-text">2. 词法异常的内存释放</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E2%80%94%E2%80%94%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E6%9E%84%E5%BB%BA%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95%E6%A0%91%EF%BC%88AST%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">第四章：语法分析器——递归下降构建抽象语法树（AST）</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Alexander Hou</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%E7%A3%A8%E5%88%80%E4%B8%8D%E8%AF%AF%E7%A0%8D%E6%9F%B4%E5%B7%A5"><span class="nav-number">1.1.</span> <span class="nav-text">一些简单的准备工作：磨刀不误砍柴工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%AC%E8%B4%A8%EF%BC%9AShell-%E6%9C%AC%E8%B4%A8%E4%B8%8A%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E6%B0%B8%E4%B8%8D%E5%81%9C%E6%81%AF%E7%9A%84%E5%BE%AA%E7%8E%AF%E3%80%82"><span class="nav-number">1.2.</span> <span class="nav-text">核心本质：Shell 本质上就是一个永不停息的循环。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%9D%97%E4%B9%8B%E9%97%B4%E6%98%8E%E7%A1%AE%E7%9A%84%E5%88%86%E5%B7%A5"><span class="nav-number">1.3.</span> <span class="nav-text">架构设计：四大模块之间明确的分工</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E8%AF%BB%E5%8F%96%E5%99%A8%E2%80%94%E2%80%94%E6%8D%95%E8%8E%B7%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.</span> <span class="nav-text">第一章：读取器——捕获字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9-getline-%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.1.</span> <span class="nav-text">选择 getline 的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86-Ctrl-D-EOF"><span class="nav-number">2.2.</span> <span class="nav-text">处理 Ctrl+D (EOF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86-Ctrl-C"><span class="nav-number">2.3.</span> <span class="nav-text">处理 Ctrl+C</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E2%80%94%E2%80%94%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">第二章：词法分析器——词法分析与状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">引言：什么是词法分析？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text">核心数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%EF%BC%88FSM%EF%BC%89%E7%AE%80%E4%BB%8B"><span class="nav-number">3.3.</span> <span class="nav-text">有限状态机（FSM）简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E6%9C%BA%E7%9A%84%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">第三章：词法分析器——状态机的核心实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tokenize-%E4%B8%BB%E5%BE%AA%E7%8E%AF%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="nav-number">4.1.</span> <span class="nav-text">tokenize 主循环的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9Ai-%E4%B8%8E-j-%E7%9A%84%E5%8E%9F%E4%BD%8D%E6%B8%85%E6%B4%97"><span class="nav-number">4.2.</span> <span class="nav-text">双指针实现原理：i 与 j 的原位清洗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E4%B8%8E%E5%88%86%E6%94%AF%E5%A4%84%E7%90%86"><span class="nav-number">4.3.</span> <span class="nav-text">状态转移与分支处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%AD%A3%E5%B8%B8%E7%8A%B6%E6%80%81%E4%B8%8B%E7%9A%84%E7%AC%A6%E5%8F%B7%E5%88%86%E6%B5%81"><span class="nav-number">4.3.1.</span> <span class="nav-text">1. 正常状态下的符号分流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%95%E5%8F%B7%E4%B8%8E%E8%BD%AC%E4%B9%89%E7%8A%B6%E6%80%81%E4%B8%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%BF%9D%E6%8A%A4"><span class="nav-number">4.3.2.</span> <span class="nav-text">2. 引号与转义状态下的字符保护</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6"><span class="nav-number">4.4.</span> <span class="nav-text">内存管理与错误处理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84%E6%89%A9%E5%AE%B9"><span class="nav-number">4.4.1.</span> <span class="nav-text">1. 动态数组扩容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%AF%8D%E6%B3%95%E5%BC%82%E5%B8%B8%E7%9A%84%E5%86%85%E5%AD%98%E9%87%8A%E6%94%BE"><span class="nav-number">4.4.2.</span> <span class="nav-text">2. 词法异常的内存释放</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E2%80%94%E2%80%94%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E6%9E%84%E5%BB%BA%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95%E6%A0%91%EF%BC%88AST%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">第四章：语法分析器——递归下降构建抽象语法树（AST）</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

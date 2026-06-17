@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Alexander Hou">
+    
+    <title>
+        
+            preparations-for-server.md |
+        
+        Alexander Hou&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#1793d1","title":"Alexander Hou's blog","author":"Alexander Hou","avatar":"/images/avatar.jpg","logo":null,"favicon":null},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep it simple, stupid.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/Alexander-Hou","weixin":"img | ./images/wechat.jpg","qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":false,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2026,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Alexander Hou&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        preparations-for-server.md
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Alexander Hou</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2026-06-15 13:02:37</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Wed Jun 17 2026 20:21:15 GMT+0800">2026-06-17 20:21:15</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>近期，我在阿里云上以学生的身份购买了一年的服务器。我的初心只是纯玩而已，单纯想体验一下服务器环境而已，另外还可以学一些服务器运维的知识。 我在使用Arch Linux的过程中意识到，带着玩心和好奇心去折腾，往往比带着功利的目的学得更快、更扎实。我购买的实例的系统配置是Debian 13.5 64位，主要是因为Debian是真正的“教科书级”纯净系统和其“坚如磐石”的稳定性。在体验服务器系统之前，有一些必要的配置，我在这篇文章中简单地记录一下。</p>
+<p>大部分云厂商（包括阿里云）的 Linux 服务器在创建时，默认都是以 <code>root</code> 用户登录的。阿里云通常会给用户一个默认管理员账户 <code>root</code> ，通常会让用户选择或设置 <code>root</code> 用户的密码（或者绑定 SSH 密钥）。然后用户用<code>ssh root@服务器公网IP</code> 登录。此时登录系统后，用户的权限便是最高权限 <code>root</code> ，这会带来一些问题，比如误操作问题，<code>root</code> 拥有系统的最高权限，一个随手的 <code>rm -rf /</code> 或者配错环境变量就可能让系统直接崩溃；还有安全问题，互联网上有无数的脚本在 24 小时无差别扫描云服务器的 <code>22</code> 端口（SSH），并尝试用 <code>root</code> 作为用户名去猜密码，一旦被密码被暴力破解，攻击者进入系统，而且拿到的是最高权限，这是一件多么糟糕的事情！所以，工欲善其事，必先利其器，一些前置的工作还是很有必要做好的。</p>
+<h3 id="创建普通用户-sudo"><a href="#创建普通用户-sudo" class="headerlink" title="创建普通用户 + sudo"></a>创建普通用户 + sudo</h3><p>当我们以 <code>root</code> 身份登入系统后，第一步便是创建新用户。在 Debian 中，有两个命令可以创建用户：<code>useradd</code> 和 <code>adduser</code> ，这里强烈推荐使用 <code>adduser</code>：这是一个交互式的 Perl 脚本，它会自动帮你创建家目录、配置 Shell、并提示你输入密码，非常省心。运行以下命令（将 <code>myuser</code> 替换你想用的用户名，比如你的英文名）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser myuser</span><br></pre></td></tr></table></figure>
+
+<p>命令执行后，终端会提示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">New password:     // 输入密码</span><br><span class="line">Retype new password:     // 再次输入密码</span><br><span class="line">passwd: password updated successfully</span><br><span class="line">Changing the user information for alexander</span><br><span class="line">Enter the new value, or press ENTER for the default</span><br><span class="line">	Full Name []:     // 回车跳过</span><br><span class="line">	Room Number []:     // 回车跳过</span><br><span class="line">	Work Phone []:     // 回车跳过</span><br><span class="line">	Home Phone []:     // 回车跳过</span><br><span class="line">	Other []:     // 回车跳过</span><br><span class="line">Is the information correct? [Y/n]     // 输入Y并回车确认</span><br></pre></td></tr></table></figure>
+
+<p>创建好新用户后，便是为新用户安装并配置 sudo 权限。Debian 默认的最小化安装里，可能没有预装 <code>sudo</code> 命令，而且普通用户默认也无法执行系统级命令。首先先检查并确保系统里安装了 <code>sudo</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update &amp;&amp; apt install <span class="built_in">sudo</span></span><br></pre></td></tr></table></figure>
+
+<p>将新用户加入 sudo 用户组，在 Debian 中，只要用户属于 <code>sudo</code> 组，就自动拥有了管理员权限。执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -aG <span class="built_in">sudo</span> myuser</span><br></pre></td></tr></table></figure>
+
+<p><code>-a</code> 代表 append（追加），<code>-G</code> 代表 group（用户组），合起来就是把用户追加到指定的组里，而不影响他原本所在的组。完成这一步后，另外开一个本地终端窗口（先别关当前的 root 窗口，留作后路），尝试用新用户登录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh myuser@你的服务器公网IP</span><br></pre></td></tr></table></figure>
+
+<p>登录成功后，测试一下它的 <code>sudo</code> 权限是否正常。比如试着更新一下软件源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure>
+
+<p>系统会提示你输入当前新用户的密码（而不是 root 密码）。如果能正常刷出软件源列表，说明你的普通用户已经配置完成！这还没有结束，接下来我们要完成云服务器安全配置中最关键的“最后一块拼图”——禁用以 <code>root</code> 身份登录。</p>
+<h3 id="禁止-root-SSH-登录"><a href="#禁止-root-SSH-登录" class="headerlink" title="禁止 root SSH 登录"></a>禁止 root SSH 登录</h3><p>在上文中，我们了解到在互联网上，云服务器公网 IP 是一片“荒原”。几乎每秒钟都有遍布全球的自动化扫描脚本（Botnets）在疯狂尝试连接所有在线服务器的 <code>22</code> 端口。这些脚本默认的攻击目标就是 <code>root</code> 用户。因为它们知道 <code>root</code> 必然存在，且权限最高。一旦用户禁用了 <code>root</code> 远程登录，攻击者不仅需要破解密码，还得先猜出你的用户名。如果再配合 SSH 密钥（Public Key Authentication），即便攻击者有超级计算机，在没有私钥的情况下也几乎无法进入。</p>
+<p>在操作前请务必记住：不要关闭当前已经连上的 <code>root</code> 终端窗口！ 这是“救命稻草”，万一配置错了，还可以通过这个窗口改回来。</p>
+<p>使用 <code>root</code> 权限打开 SSH 服务配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>在文件中找到 <code>PermitRootLogin</code> 这一行。如果前面有 <code>#</code> 号，把 <code>#</code> 去掉，然后将后面的参数改为  <code>no</code>。在重启服务前，建议检查一下语法是否有误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sshd -t</span><br></pre></td></tr></table></figure>
+
+<p>如果没有报错，执行重启：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>然后执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sshd -T | grep permitroot</span><br></pre></td></tr></table></figure>
+
+<p>如果输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">login</span><br><span class="line">permitrootlogin no</span><br></pre></td></tr></table></figure>
+
+<p>说明配置完成。</p>
+<h3 id="配置-SSH-公钥登录"><a href="#配置-SSH-公钥登录" class="headerlink" title="配置 SSH 公钥登录"></a>配置 SSH 公钥登录</h3><p>配置 SSH 密钥登录是迈向“生产环境运维”最重要的里程碑。SSH 密钥登录完全摒弃了传统的密码传输，改用公钥（Public Key）与私钥（Private Key）机制。服务器只保存你的公钥，只要你能证明你持有对应的私钥，服务器就信任你。在这里，我们只是记录配置过程，对于其深处的密码学原理，我们暂不追究，也许未来我会在另一篇文章中详细说明。</p>
+<p>首先，我们需要在本地生成密钥对，在你的个人电脑（本地终端）上执行以下命令（引号中的内容可以根据自己的情况来写）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么要用 <code>ed25519</code>？ 它是目前最现代、最安全的加密算法。相比老旧的 RSA，它的密钥更短，加解密速度更快，且抗攻击性更强。命令执行后，它会询问保存路径（一路回车即可）。它还会询问 Passphrase（密码短语），这相当于给你本地的私钥加了一层锁，建议设置一个，即使你的电脑丢了，别人也无法直接使用你的私钥。</p>
+<p>接下来，我们需要将公钥上传到服务器。推荐使用 <code>ssh-copy-id</code> 自动上传，在本地终端运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id 用户名@服务器IP</span><br></pre></td></tr></table></figure>
+
+<p>系统会提示你输入一次服务器的密码，直接输入并回车即可。</p>
+<p>如果无法使用上述命令，可以手动复制粘贴公钥内容到服务器，首先先查看并复制本地公钥内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/.ssh/id_ed25519.pub</span><br></pre></td></tr></table></figure>
+
+<p>正常密码登录服务器，手动将复制的内容追加到服务器的 <code>~/.ssh/authorized_keys</code> 文件中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/.ssh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;复制的公钥内容&quot;</span> &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>接下来便是测试SSH公钥登录是否配置完成，首先，我们需要新开一个本地终端窗口，尝试登录，如果配置正确，是不需要密码直接就可以进入服务器了。为了彻底防止黑客暴力破解密码，确认公钥登录成功后，建议关闭服务器的密码登录功能。</p>
+<p>首先，我们需要在服务器上打开SSH配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>找到（或添加）以下两行，确保它们的值为 <code>no</code> 和 <code>yes</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br><span class="line">PubkeyAuthentication yes</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，在较新的 Linux 系统中，<code>/etc/ssh/sshd_config</code> 的顶部通常有一行： <code>Include /etc/ssh/sshd_config.d/*.conf</code> ，这意味着系统会优先或追加读取 <code>/etc/ssh/sshd_config.d/</code> 文件夹下的配置文件，那里的配置会覆盖主文件。我们需要检查该目录下是否有其他配置文件干扰：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/ssh/sshd_config.d/*.conf</span><br></pre></td></tr></table></figure>
+
+<p>如果发现某个 <code>.conf</code> 文件里写了 <code>PasswordAuthentication yes</code>（比如  <code>50-cloud-init.conf</code>），直接编辑那个文件，将其修改为 <code>no</code> 。保存退出，并重启 SSH 服务生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>接下来，我们需要测试配置是否已经完成，在本地新开一个终端，运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -o PubkeyAuthentication=no 用户名@服务器IP</span><br></pre></td></tr></table></figure>
+
+<p>如果终端输出是 <code>Permission denied (publickey).</code> ，则说明我们的配置是成功的。</p>
+<h3 id="修改SSH端口"><a href="#修改SSH端口" class="headerlink" title="修改SSH端口"></a>修改SSH端口</h3><p>将 SSH 的默认 22 端口改为其他端口（如 2222）可以有效减少互联网上绝大多数针对 22 端口的自动化恶意扫描和暴力破解。注意在确认新端口完全畅通之前，绝对不要关闭当前的 SSH 窗口，且建议先让 22 和 2222 端口同时监听。</p>
+<p>我们打开SSH配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>在文件中找到 <code>#Port 22</code> 这一行（默认可能是被 <code>#</code> 注释掉的），改成以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Port 22</span><br><span class="line">Port 2222</span><br></pre></td></tr></table></figure>
+
+<p>现在，我们需要先保留 22，先同时启用 2222 端口，等测试成功后再删掉 22 端口。如果系统有前面提到的 <code>sshd_config.d/</code> 干扰文件，需要确保两边配置不要冲突。还有重要的一点是你必须告诉云厂商和系统防火墙放行 2222 端口，这步操作需要在对应的厂商的控制台完成。</p>
+<p>接下来，重启 SSH 服务让配置生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>验证端口是否已经成功监听：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss -ntlp | grep 2222</span><br></pre></td></tr></table></figure>
+
+<p>如果终端出现以下输出，则说明 2222 端口已经成功监听。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LISTEN 0      128          0.0.0.0:2222       0.0.0.0:*          </span><br><span class="line">LISTEN 0      128             [::]:2222          [::]:*          </span><br></pre></td></tr></table></figure>
+
+<p>现在我们只需要在本地电脑开新终端进行最后的连通性测试，运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p 2222 用户名@服务器IP</span><br></pre></td></tr></table></figure>
+
+<p>如果成功登录，说明 2222 端口已经成功开启。现在可以回到服务器上，放心地把 <code>sshd_config</code> 里的 <code>Port 22</code> 注释掉，只留下 <code>Port 2222</code>，然后重启 <code>sshd</code> 彻底对公网关闭 22 端口。</p>
+<h3 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h3><p>防火墙的作用不是让服务器“绝对安全”，而是控制网络入口，减少不必要的暴露，让攻击者只能接触到你明确允许开放的服务。现在我们已经把 SSH 端口改成了 <code>2222</code>，并且彻底关闭了 22 端口，那么现在配置防火墙的核心任务就两个：死守 <code>2222</code> 端口（确保你自己能进去，别把自己锁在外面）和彻底封闭 <code>22</code> 端口以及其他不必要的系统端口。在服务器厂商提供的环境下，防火墙其实分为两层，一层是厂商安全组，另一层是系统内部防火墙。为了保证绝对安全和配置生效，我们需要两层都配置好。</p>
+<p>厂商安全组是服务器外面的第一道防线，效率极高，不消耗用户服务器的 CPU。对此的相关配置，我们需要登录厂商提供的控制台界面，修改相应的配置规则（主要是入方向规则的修改）即可。</p>
+<p>第二层便是系统内部的防火墙，由于我使用的是debian系统，这里主要介绍 <code>ufw</code> 的配置过程。首先，我们需要安装并检查<code>ufw</code> 的状态，执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt install ufw</span><br><span class="line"><span class="built_in">sudo</span> ufw status</span><br></pre></td></tr></table></figure>
+
+<p>如果显示 <code>Status: inactive</code>，说明防火墙目前是关闭的。可能你们的想法是直接开启防火墙服务，但是这不是正确的想法。在开启防火墙之前，我们必须先把 <code>2222</code> 端口放行，否则一旦开启我们就会被立刻踢出服务器。接下来就是配置放行策略的过程，运行以下命令，注意要按照顺序执行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ufw default deny incoming</span><br><span class="line"><span class="built_in">sudo</span> ufw default allow outgoing</span><br><span class="line"><span class="built_in">sudo</span> ufw allow 2222/tcp</span><br></pre></td></tr></table></figure>
+
+<p>前两条命令的目的是设置默认策略，即拒绝所有入站流量，允许所有出站流量，接下来我们所做的是放行新的SSH端口，对于其他的端口是否开放，在未来用到的时候再考虑就行了。接下来，我们正式启动防火墙，运行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ufw <span class="built_in">enable</span></span><br></pre></td></tr></table></figure>
+
+<p>终端会弹出一个警告：<code>Command may disrupt existing ssh connections. Proceed with operation (y|n)?</code> 不用慌，因为我们已经写了 <code>allow 2222/tcp</code>，敲 <code>y</code> 然后回车。当看到<code>Firewall is active and enabled on system startup</code> 时，说明防火墙已经成功运行。接下来我们来检查结果，运行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ufw status verbose</span><br></pre></td></tr></table></figure>
+
+<p>输出应该是以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Status: active</span><br><span class="line">Logging: on (low)</span><br><span class="line">Default: deny (incoming), allow (outgoing), disabled (routed)</span><br><span class="line">New profiles: skip</span><br><span class="line"></span><br><span class="line">To                         Action      From</span><br><span class="line">--                         ------      ----</span><br><span class="line">2222/tcp                   ALLOW IN    Anywhere                  </span><br><span class="line">2222/tcp (v6)              ALLOW IN    Anywhere (v6)             </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-fail2ban"><a href="#安装-fail2ban" class="headerlink" title="安装 fail2ban"></a>安装 fail2ban</h3><p>fail2ban 的工作原理非常硬核且有效：它会实时监控系统的日志文件（如 <code>/var/log/auth.log</code>）。一旦发现某个 IP 在短时间内不断尝试错误的密钥、错误的端口或者密码（即使你禁用了密码，黑客的自动化脚本仍会产生恶意请求日志），fail2ban 就会直接调用系统防火墙，把这个 IP 扔进小黑屋（封禁其 IP 访问），持续几小时甚至几天。在完成了以上配置之后，引入 fail2ban 就是为服务器披上的最后一套主动防御铠甲。</p>
+<p>首先，我们需要安装<code>fail2ban</code> ，运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt install fail2ban</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，<code>fail2ban</code> 会自动创建一个名为 <code>fail2ban</code> 的系统服务，并默认处于启动状态。运行以下命令查看<code>fail2ban</code> 的状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status fail2ban</span><br></pre></td></tr></table></figure>
+
+<p>接下来就是配置过程了。<code>fail2ban</code> 的默认配置文件位于 <code>/etc/fail2ban/jail.conf</code>。但是，绝对不要直接修改这个文件，因为以后软件更新时它会被覆盖。正确做法是创建一个名为 <code>jail.local</code> 的副本，<code>fail2ban</code> 会自动读取它并覆盖默认设置。运行以下命令创建本地配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /etc/fail2ban/jail.conf /etc/fail2ban/jail.local</span><br></pre></td></tr></table></figure>
+
+<p>编辑配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/fail2ban/jail.local</span><br></pre></td></tr></table></figure>
+
+<p>修改全局默认配置参数，找到<code>[DEFAULT]</code> 模块，按需调整以下几个核心参数：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">bantime</span>  = <span class="number">1</span>h        <span class="comment"># 违规后的封禁时间（1h表示1小时，也可以设为1d天）</span></span><br><span class="line"><span class="attr">findtime</span> = <span class="number">10</span>m       <span class="comment"># 统计失败次数的时间窗口（10分钟内）</span></span><br><span class="line"><span class="attr">maxretry</span> = <span class="number">5</span>         <span class="comment"># 在findtime期间允许的最大失败次数，超过即封禁</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 极重要：把你自己本地的常用公网 IP 或内网 IP 加进白名单，防止把自己封入黑屋</span></span><br><span class="line"><span class="attr">ignoreip</span> = <span class="number">127.0</span>.<span class="number">0.1</span>/<span class="number">8</span> ::<span class="number">1</span>  <span class="comment">#你的本地公网IP</span></span><br></pre></td></tr></table></figure>
+
+<p>接着是启用并配置 SSH 监控模块，继续向下滚动，找到 <code>[sshd]</code> 模块（或者直接在文件末尾添加以下内容）。必须将端口改为前面改过的 <code>2222</code>：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[sshd]</span></span><br><span class="line"><span class="attr">enabled</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">port</span>    = <span class="number">2222</span></span><br><span class="line"><span class="attr">logpath</span> = %(sshd_log)s</span><br><span class="line"><span class="attr">backend</span> = %(sshd_backend)s</span><br><span class="line"><span class="attr">maxretry</span> = <span class="number">5</span></span><br><span class="line"><span class="attr">findtime</span> = <span class="number">10</span>m</span><br><span class="line"><span class="attr">bantime</span> = <span class="number">1</span>h</span><br></pre></td></tr></table></figure>
+
+<p>改好后在终端运行以下命令让配置彻底生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart fail2ban</span><br></pre></td></tr></table></figure>
+
+<p>运行以下命令，查看当前 <code>sshd</code> 监狱的实时运行状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> fail2ban-client status sshd</span><br></pre></td></tr></table></figure>
+
+<p>应该在终端中看到这样的输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Status for the jail: sshd</span><br><span class="line">|- Filter</span><br><span class="line">|  |- Currently failed:	0</span><br><span class="line">|  |- Total failed:	0</span><br><span class="line">|  `- Journal matches:	_SYSTEMD_UNIT=ssh.service + _COMM=sshd</span><br><span class="line">`- Actions</span><br><span class="line">   |- Currently banned:	0</span><br><span class="line">   |- Total banned:	0</span><br><span class="line">   `- Banned IP list:	</span><br></pre></td></tr></table></figure>
+
+<p>这样<code>fail2ban</code> 的安装和配置就完成了。</p>
+<p>到这里，服务器安全防御体系（普通用户 + 公钥登录 + 隐蔽端口 + 双重防火墙 + Fail2ban 动态封禁）已经全部闭环！对于一位服务器用户来说，一个安全的环境是进行开发不可或缺的条件。在自由度极高的 Linux 世界里，安全不是一个静态的终点，而是一个动态演进的过程。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2026/06/12/about-PKGBUILD-md/"
+                                   title="关于PKGBUILD"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">关于PKGBUILD</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7-sudo"><span class="nav-number">1.</span> <span class="nav-text">创建普通用户 + sudo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%81%E6%AD%A2-root-SSH-%E7%99%BB%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">禁止 root SSH 登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-SSH-%E5%85%AC%E9%92%A5%E7%99%BB%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">配置 SSH 公钥登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9SSH%E7%AB%AF%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">修改SSH端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">5.</span> <span class="nav-text">配置防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-fail2ban"><span class="nav-number">6.</span> <span class="nav-text">安装 fail2ban</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Alexander Hou</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7-sudo"><span class="nav-number">1.</span> <span class="nav-text">创建普通用户 + sudo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%81%E6%AD%A2-root-SSH-%E7%99%BB%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">禁止 root SSH 登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-SSH-%E5%85%AC%E9%92%A5%E7%99%BB%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">配置 SSH 公钥登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9SSH%E7%AB%AF%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">修改SSH端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">5.</span> <span class="nav-text">配置防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-fail2ban"><span class="nav-number">6.</span> <span class="nav-text">安装 fail2ban</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

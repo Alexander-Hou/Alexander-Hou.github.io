@@ -9,7 +9,7 @@
     
     <title>
         
-            Creating Your Own Linux Shell (Prologue) |
+            关于PKGBUILD |
         
         Alexander Hou&#39;s blog
     </title>
@@ -197,7 +197,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Creating Your Own Linux Shell (Prologue)
+                        关于PKGBUILD
                     </div>
                 
 
@@ -223,26 +223,17 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2026-05-29 21:47:01</span>
+                <span class="datetime">2026-06-12 17:07:22</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Fri May 29 2026 21:47:50 GMT+0800">2026-05-29 21:47:50</span>
+                    <span class="datetime" data-updated="Wed Jun 17 2026 20:25:36 GMT+0800">2026-06-17 20:25:36</span>
                 </span>
             
         
 
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/shell/">shell</a></li>
-                        
-                    
-                </ul>
-            </span>
         
 
         
@@ -265,32 +256,7 @@
                     
 
                     
-                         <p>For every system programmer or Linux enthusiast, the terminal is a magical black box. Every day, we type countless commands like this:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&quot;.c&quot;</span> &gt; output.txt &amp;&amp; <span class="built_in">cat</span> output.txt</span><br></pre></td></tr></table></figure>
-
-<p>The Enter key on the keyboard is like a spell; the moment it’s pressed, the screen flashes, and complex pipelines, redirections, and logical judgments are completed instantly. Have you ever wondered:</p>
-<ul>
-<li>How does the terminal break down this long and complex string of symbols?</li>
-<li>What is the kernel-level data flow behind the <code>|</code> (pipeline)?</li>
-<li>How do <code>&amp;&amp;</code> and <code>||</code> achieve conditional short-circuiting at the process level?</li>
-</ul>
-<p>The most efficient way to learn is to write it yourself. This blog series will guide you from scratch to implement a modern command interpreter using pure C.</p>
-<h2 id="Some-preparations：Sharpening-your-axe-won’t-delay-your-woodcutting"><a href="#Some-preparations：Sharpening-your-axe-won’t-delay-your-woodcutting" class="headerlink" title="Some preparations：Sharpening your axe won’t delay your woodcutting."></a>Some preparations：Sharpening your axe won’t delay your woodcutting.</h2><p>Because we will be making extensive use of Linux system calls (such as <code>fork</code>, <code>pipe</code>, etc.), a native Linux environment is essential (since I’m using Arch Linux, all the code in this series has been tested on Arch Linux). If you are using Windows, please make sure you have WSL2 configured. In addition, you will need the <code>gcc</code> compiler and <code>make</code> build tools. The code itself is written in pure C, and you can use classic editors such as Vim, Neovim, or VS Code.</p>
-<h2 id="Core-essence-The-Shell-is-simply-a-never-give-up-loop"><a href="#Core-essence-The-Shell-is-simply-a-never-give-up-loop" class="headerlink" title="Core essence: The Shell is simply a never-give-up loop."></a>Core essence: The Shell is simply a never-give-up loop.</h2><p>Stripped of complex syntax parsing and process control, the underlying skeleton of any shell is quite simple. Its essence can be summarized as an infinite loop (often called a REPL: Read-Eval-Print Loop).</p>
-<p>In the shell we’re going to implement, this loop in the main function looks like this:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    print_prompt();     <span class="comment">// 1. Print prompt</span></span><br><span class="line">    <span class="type">char</span> *line = read_line();     <span class="comment">// 2. Read: Get user input</span></span><br><span class="line">    <span class="keyword">if</span> (!line) <span class="keyword">continue</span>;</span><br><span class="line">    </span><br><span class="line">    Token *tokens = tokenize(line);     <span class="comment">// 3. Lex: Lexical Analysis</span></span><br><span class="line">    <span class="keyword">if</span> (!tokens) &#123; </span><br><span class="line">        <span class="built_in">free</span>(line); </span><br><span class="line">        <span class="keyword">continue</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Node *ast = parse(tokens);     <span class="comment">// 4. Parse: Syntax analysis (constructing the Abstract Syntax Tree)</span></span><br><span class="line">    <span class="keyword">if</span> (!ast) &#123; </span><br><span class="line">        <span class="built_in">free</span>(tokens); </span><br><span class="line">        <span class="built_in">free</span>(line); </span><br><span class="line">        <span class="keyword">continue</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> status = execute(ast);     <span class="comment">// 5. Eval: Execute the abstract syntax tree</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 6. Clean: Free up memory to prepare for the next loop.</span></span><br><span class="line">    free_tree(ast);</span><br><span class="line">    <span class="built_in">free</span>(tokens);</span><br><span class="line">    <span class="built_in">free</span>(line);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Architecture-Design-Clear-Division-of-Labor-Among-the-Four-Major-Modules"><a href="#Architecture-Design-Clear-Division-of-Labor-Among-the-Four-Major-Modules" class="headerlink" title="Architecture Design: Clear Division of Labor Among the Four Major Modules"></a>Architecture Design: Clear Division of Labor Among the Four Major Modules</h2><p>To ensure the system is robust and easy to maintain, I adopted the KISS principle (Keep it simple, stupid) as the core guideline, decoupling the complex command processing pipeline into four independent, single-responsibility classic modules: a reader, a lexical analyzer, a parser, and an executor. The core architecture design of this project is shown below:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[User Input] </span><br><span class="line">     │</span><br><span class="line">     ▼</span><br><span class="line">┌───────────┐</span><br><span class="line">│ reader.c  │ ──► Use `getline` to dynamically read and process input boundaries (`EOF`/`EINTR`).</span><br><span class="line">└───────────┘</span><br><span class="line">     │</span><br><span class="line">     ▼ (Command String)</span><br><span class="line">┌───────────┐</span><br><span class="line">│  lexer.c  │ ──► State machine-based token segmentation generates a flat array of tokens.</span><br><span class="line">└───────────┘</span><br><span class="line">     │</span><br><span class="line">     ▼ (Token Stream)</span><br><span class="line">┌───────────┐</span><br><span class="line">│ parser.c  │ ──► Recursive descent parsing to construct an abstract syntax tree (AST)</span><br><span class="line">└───────────┘</span><br><span class="line">     │</span><br><span class="line">     ▼ (Abstract Syntax Tree)</span><br><span class="line">┌───────────┐</span><br><span class="line">│executor.c │ ──► `fork`/`execvp` execution, short-circuit evaluation, pipelining and redirection</span><br><span class="line">└───────────┘</span><br><span class="line">     │</span><br><span class="line">     ▼</span><br><span class="line">[Memory reclamation]   ──► The main loop executes `cleanup_iteration` to release all heap resources for this iteration.</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Next-chapter-preview-Building-the-reader"><a href="#Next-chapter-preview-Building-the-reader" class="headerlink" title="Next chapter preview: Building the reader"></a>Next chapter preview: Building the reader</h2><p>The architectural blueprint has been laid out, and keeping it simple doesn’t mean shoddy workmanship. In the next chapter, we’ll delve into the <strong><code>reader.c</code></strong> module.</p>
-<p>We’ll see how the POSIX standard <code>getline</code> function elegantly handles memory leaks without causing any disruption or loss of memory, even when faced with the user’s brutal <code>Ctrl+C</code> interruption and <code>Ctrl+D</code> exit.</p>
-<p>Welcome to the world of Linux system programming! Let’s begin!</p>
-
+                         
                     
                 </div>
 
@@ -310,15 +276,31 @@
                 
                     <div class="post-nav border-box">
                         
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2026/06/15/preparations-for-server-md/"
+                                   title="preparations-for-server.md"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">preparations-for-server.md</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2026/05/29/cargo/"
-                                   title="cargo"
+                                   href="/2026/06/12/magic-use-of-pacman-md/"
+                                   title="pacman的一些玩法"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">cargo</span>
+                                        <span class="post-nav-title-item text-ellipsis">pacman的一些玩法</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -346,7 +328,7 @@
             <div class="pc-post-toc left-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-preparations%EF%BC%9ASharpening-your-axe-won%E2%80%99t-delay-your-woodcutting"><span class="nav-number">1.</span> <span class="nav-text">Some preparations：Sharpening your axe won’t delay your woodcutting.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-essence-The-Shell-is-simply-a-never-give-up-loop"><span class="nav-number">2.</span> <span class="nav-text">Core essence: The Shell is simply a never-give-up loop.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture-Design-Clear-Division-of-Labor-Among-the-Four-Major-Modules"><span class="nav-number">3.</span> <span class="nav-text">Architecture Design: Clear Division of Labor Among the Four Major Modules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-chapter-preview-Building-the-reader"><span class="nav-number">4.</span> <span class="nav-text">Next chapter preview: Building the reader</span></a></li></ol>
+        
     </div>
 </div>
 
@@ -484,7 +466,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-preparations%EF%BC%9ASharpening-your-axe-won%E2%80%99t-delay-your-woodcutting"><span class="nav-number">1.</span> <span class="nav-text">Some preparations：Sharpening your axe won’t delay your woodcutting.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-essence-The-Shell-is-simply-a-never-give-up-loop"><span class="nav-number">2.</span> <span class="nav-text">Core essence: The Shell is simply a never-give-up loop.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture-Design-Clear-Division-of-Labor-Among-the-Four-Major-Modules"><span class="nav-number">3.</span> <span class="nav-text">Architecture Design: Clear Division of Labor Among the Four Major Modules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-chapter-preview-Building-the-reader"><span class="nav-number">4.</span> <span class="nav-text">Next chapter preview: Building the reader</span></a></li></ol>
+        
     </div>
 </div>
 
